@@ -13,6 +13,8 @@ public class Hello {
         requestProvider.gets();
         FileProvider fileProvider = new FileProvider();
         fileProvider.gets();
+        SolutionIdProvider solutionIdProvider = new SolutionIdProvider();
+        solutionIdProvider.gets();
 
     }
 }
