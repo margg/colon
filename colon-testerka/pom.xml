@@ -57,7 +57,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>pl.edu.agh.to.testerka.Hello</mainClass>
+                            <mainClass>pl.edu.agh.to.testerka.Runner</mainClass>
                             <classpathPrefix>dependency-jars/</classpathPrefix>
                         </manifest>
                     </archive>
@@ -88,7 +88,7 @@
                             </descriptorRefs>
                             <archive>
                                 <manifest>
-                                    <mainClass>pl.edu.agh.to.testerka.Hello</mainClass>
+                                    <mainClass>pl.edu.agh.to.testerka.Runner</mainClass>
                                 </manifest>
                             </archive>
                         </configuration>
