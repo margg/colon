@@ -4,8 +4,6 @@ import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static spark.Spark.get;
-
 public class Hello {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Hello.class);
@@ -26,5 +24,9 @@ public class Hello {
             }
             return status;
         }, gson::toJson);
+
+        Mockup mockup = new Mockup();
+        mockup.postAndGets();
+
     }
 }
