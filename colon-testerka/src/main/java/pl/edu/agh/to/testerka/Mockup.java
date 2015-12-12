@@ -16,17 +16,10 @@ public class Mockup {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Mockup.class);
 
-
     public Mockup() {
     }
 
-    public void postAndGets() {
-        get("/solutions/:solution_id", (req, res) -> {
-            LOGGER.info("Received GET request for solution {}.", req.params(":solution_id"));
-            JsonObject json = new JsonObject();
-            json.addProperty("status", "OK");
-            return json.toString();
-        });
+    public void createRestAPI() {
 
         get("/mock/files/:solution_id", (req, res) -> {
             LOGGER.info("Received GET request for file {}.", req.params(":solution_id"));
@@ -37,7 +30,7 @@ public class Mockup {
         get("/mock/solutions/not_started", (req, res) -> {
             LOGGER.info("Received GET request for not started solutions.");
 
-            List<String> objList = Lists.newArrayList("9","8","7","6", "5");
+            List<String> objList = Lists.newArrayList("9", "8", "7", "6", "5");
             return new Gson().toJson(objList);
         });
 
@@ -52,8 +45,5 @@ public class Mockup {
             LOGGER.info("Received POST request for solution {} status.", req.params(":solution_id"));
             return "OK";
         });
-
-
-
     }
 }

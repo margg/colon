@@ -10,7 +10,7 @@ public class StatusService {
 
     public TaskStatus get(String solutionId) {
         TaskStatus status = new TaskStatus();
-        if (runnerService.isInProgress(solutionId)){
+        if (runnerService.isInProgress(solutionId)) {
             status.setInProgress();
         } else {
             // TODO: send GET to StatusService in DB to check status
