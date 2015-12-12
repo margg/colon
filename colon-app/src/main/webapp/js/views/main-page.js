@@ -9,7 +9,7 @@ define([
         render: function(){
             $.get('api').done(function(data){
                 this.$el.html(_.template(mainPageTemplate));
-                this.$('.user').html("The user is " + data.firstname + " " + data.lastname);
+                this.$('.user').html("The user is " + data.firstName + " " + data.lastName);
             }.bind(this));
 
         }
