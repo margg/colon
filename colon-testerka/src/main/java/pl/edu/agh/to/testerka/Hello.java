@@ -9,12 +9,8 @@ public class Hello {
 
     public static void main(String[] args) {
 
-        RequestProvider requestProvider = new RequestProvider();
-        requestProvider.gets();
-        FileProvider fileProvider = new FileProvider();
-        fileProvider.gets();
-        SolutionIdProvider solutionIdProvider = new SolutionIdProvider();
-        solutionIdProvider.gets();
+        Mockup mockup = new Mockup();
+        mockup.postAndGets();
 
     }
 }
