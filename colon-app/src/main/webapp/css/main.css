@@ -16,6 +16,10 @@
     margin: 0 auto;
 }
 
+form{
+    width: 50%;
+}
+
 .input-login {
     margin: 10px 0;
 }
