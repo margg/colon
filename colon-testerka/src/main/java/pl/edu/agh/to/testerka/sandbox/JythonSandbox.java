@@ -14,10 +14,14 @@ public class JythonSandbox implements Sandbox {
         final Writer outputStream = new StringWriter();
         PythonInterpreter interpreter = PythonInterpreterFactory.createPythonInterpreter(inputStream, outputStream);
 
-        // TODO: handle RTE and TLE statuses
-        long codeExecutionTime = measureExecutionTime(interpreter, pythonCode);
-        TestResultStatus testResultStatus = getTestResultStatus(outputStream, correctOutput);
-        return new TestResult(testResultStatus, codeExecutionTime);
+        // TODO: handle TLE statuses
+        try {
+            long codeExecutionTime = measureExecutionTime(interpreter, pythonCode);
+            TestResultStatus testResultStatus = getTestResultStatus(outputStream, correctOutput);
+            return new TestResult(testResultStatus, codeExecutionTime);
+        } catch (Exception e) {
+            return new TestResult(TestResultStatus.RuntimeError, 0);
+        }
     }
 
     private long measureExecutionTime(PythonInterpreter interpreter, String pythonCode) {
