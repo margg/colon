@@ -6,6 +6,10 @@ public class TestResult {
     private TestResultStatus testResultStatus;
     private long executionTimeMillis;
 
+    public TestResult(TestResultStatus testResultStatus) {
+        this(testResultStatus, 0);
+    }
+
     public TestResult(TestResultStatus testResultStatus, long executionTimeMillis) {
         this.testResultStatus = testResultStatus;
         this.executionTimeMillis = executionTimeMillis;
