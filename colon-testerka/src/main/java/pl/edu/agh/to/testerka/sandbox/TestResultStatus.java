@@ -4,8 +4,7 @@ public enum TestResultStatus {
     OK("OK"),
     TimeLimitExceeded("TLE"),
     Answer("ANS"),
-    RuntimeError("RTE"),
-    Rejected("REJ");
+    RuntimeError("RTE");
 
 
     private final String status;
