@@ -4,11 +4,17 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url"/>
-        <property name="connection.driver_class"/>
-        <property name="connection.username"/>
-        <property name="connection.password"/>
+        <!-- set in persistence.HibernateUtils based on environment variables -->
+        <property name="connection.url" />  <!-- default jdbc:mysql://localhost:3306/colon_dev -->
+        <property name="connection.username" /> <!-- default root -->
+        <property name="connection.password" /> <!-- default empty -->
+
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">false</property>
+
         <!-- DB schema will be updated if needed -->
-        <!-- <property name="hbm2ddl.auto">update</property> -->
+        <property name="hbm2ddl.auto">update</property>
     </session-factory>
 </hibernate-configuration>
