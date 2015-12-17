@@ -12,6 +12,6 @@ public class HomeController {
 
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json;charset=UTF-8", headers="Accept=*") @ResponseBody
 	public Student findAll() {
-		return new Student("aaa", "bbb", "usr1", null);
+		return new Student("aaa", "bbb", "usr1", "secret", null);
 	}
 }
