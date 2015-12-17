@@ -7,8 +7,8 @@ public class Teacher extends User {
     private List<Group> groups;
     private List<Task> tasks;
 
-    public Teacher(String firstName, String lastName, String username, List<Group> groups, List<Task> tasks) {
-        super(firstName, lastName, username);
+    public Teacher(String firstName, String lastName, String username, String password, List<Group> groups, List<Task> tasks) {
+        super(firstName, lastName, username, password);
         this.groups = groups;
         this.tasks = tasks;
     }

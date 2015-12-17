@@ -4,6 +4,8 @@ import java.util.List;
 
 public class Group {
 
+    private long id;
+    private String name;
     private Teacher teacher;
     private List<Student> students;
 
@@ -14,6 +16,12 @@ public class Group {
 
     public Group() {
     }
+
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
     public Teacher getTeacher() {
         return teacher;

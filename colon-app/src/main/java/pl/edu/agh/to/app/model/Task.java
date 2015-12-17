@@ -6,6 +6,9 @@ import java.util.Map;
 
 public class Task {
 
+    private long id;
+    private String name;
+    private String description;
     private Teacher teacher;
     private Map<Group, Date> dates;
     private int timeLimit;
@@ -21,6 +24,30 @@ public class Task {
     }
 
     public Task() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Teacher getTeacher() {
@@ -47,16 +74,19 @@ public class Task {
         this.timeLimit = timeLimit;
     }
 
+
+    // These should load test files from colon-files
     public String getTestInput() {
         return testInput;
     }
 
-    public void setTestInput(String testInput) {
-        this.testInput = testInput;
-    }
-
     public String getTestOutput() {
         return testOutput;
+    }
+
+    // These should save test files to colon-files
+    public void setTestInput(String testInput) {
+        this.testInput = testInput;
     }
 
     public void setTestOutput(String testOutput) {

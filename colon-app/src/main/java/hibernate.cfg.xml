@@ -16,5 +16,13 @@
 
         <!-- DB schema will be updated if needed -->
         <property name="hbm2ddl.auto">update</property>
+
+        <!-- Mappings -->
+        <mapping resource="pl/edu/agh/to/app/model/Administrator.hbm.xml" />
+        <mapping resource="pl/edu/agh/to/app/model/Group.hbm.xml" />
+        <mapping resource="pl/edu/agh/to/app/model/Solution.hbm.xml" />
+        <mapping resource="pl/edu/agh/to/app/model/Student.hbm.xml" />
+        <mapping resource="pl/edu/agh/to/app/model/Task.hbm.xml" />
+        <mapping resource="pl/edu/agh/to/app/model/Teacher.hbm.xml" />
     </session-factory>
 </hibernate-configuration>

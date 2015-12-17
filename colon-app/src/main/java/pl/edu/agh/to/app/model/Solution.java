@@ -2,6 +2,7 @@ package pl.edu.agh.to.app.model;
 
 public class Solution {
 
+    private long id;
     private int execTime;
     private String status;
     private User author;
@@ -17,6 +18,14 @@ public class Solution {
     }
 
     public Solution() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public int getExecTime() {
