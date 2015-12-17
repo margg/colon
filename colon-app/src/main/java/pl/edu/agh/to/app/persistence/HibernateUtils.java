@@ -22,17 +22,20 @@ public class HibernateUtils {
             String host = (System.getenv("DB_HOST") == null) ? "localhost" : System.getenv("DB_HOST");
             String database = (System.getenv("DB_DATABASE") == null) ? "colon_dev" : System.getenv("DB_DATABASE");
             String port = (System.getenv("DB_PORT") == null) ? "3306" : System.getenv("DB_PORT");
-            configuration.setProperty("connection.url", "jdbc:mysql://" + host + ":" + port + "/" + database);
+            configuration.setProperty("hibernate.connection.url", "jdbc:mysql://" + host + ":" + port + "/" + database + "?useSSL=false");
 
             String username = (System.getenv("DB_USERNAME") == null) ? "root" : System.getenv("DB_USERNAME");
-            configuration.setProperty("connection.username", username);
+            configuration.setProperty("hibernate.connection.username", username);
 
             String password = (System.getenv("DB_PASSWORD") == null) ? "" : System.getenv("DB_PASSWORD");
-            configuration.setProperty("connection.password", password);
+            configuration.setProperty("hibernate.connection.password", password);
 
             serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
             ourSessionFactory = configuration.buildSessionFactory(serviceRegistry);
+
+            getSession().close();
         } catch (Throwable ex) {
+            System.out.println(ex.getMessage());
             throw new ExceptionInInitializerError(ex);
         }
     }
