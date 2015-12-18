@@ -5,9 +5,9 @@
 <hibernate-configuration>
     <session-factory>
         <!-- set in persistence.HibernateUtils based on environment variables -->
-        <property name="connection.url" />  <!-- default jdbc:mysql://localhost:3306/colon_dev -->
-        <property name="connection.username" /> <!-- default root -->
-        <property name="connection.password" /> <!-- default empty -->
+        <property name="hibernate.connection.url" />  <!-- default jdbc:mysql://localhost:3306/colon_dev -->
+        <property name="hibernate.connection.username" /> <!-- default root -->
+        <property name="hibernate.connection.password" /> <!-- default empty -->
 
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 
@@ -15,7 +15,14 @@
         <property name="show_sql">false</property>
 
         <!-- DB schema will be updated if needed -->
-        <property name="hbm2ddl.auto">update</property>
+        <property name="hbm2ddl.auto">create-drop</property>
+
+        <property name="hibernate.c3p0.acquire_increment">1</property>
+        <property name="hibernate.c3p0.idle_test_period">100</property>
+        <property name="hibernate.c3p0.max_size">10</property>
+        <property name="hibernate.c3p0.max_statements">10</property>
+        <property name="hibernate.c3p0.min_size">10</property>
+        <property name="hibernate.c3p0.timeout">100</property>
 
         <!-- Mappings -->
         <mapping resource="pl/edu/agh/to/app/model/Administrator.hbm.xml" />
@@ -24,5 +31,6 @@
         <mapping resource="pl/edu/agh/to/app/model/Student.hbm.xml" />
         <mapping resource="pl/edu/agh/to/app/model/Task.hbm.xml" />
         <mapping resource="pl/edu/agh/to/app/model/Teacher.hbm.xml" />
+
     </session-factory>
 </hibernate-configuration>
