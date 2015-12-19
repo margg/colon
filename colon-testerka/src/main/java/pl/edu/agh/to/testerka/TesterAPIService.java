@@ -19,6 +19,7 @@ public class TesterAPIService {
     }
 
     public void setupTestersAPI() {
+
         Gson gson = new Gson();
         get("/solutions/:solution_id", (req, res) -> {
             String solutionId = req.params(":solution_id");
