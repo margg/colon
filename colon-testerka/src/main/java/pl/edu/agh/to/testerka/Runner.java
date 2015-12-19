@@ -1,22 +1,32 @@
 package pl.edu.agh.to.testerka;
 
 import com.google.gson.Gson;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pl.edu.agh.to.testerka.sandbox.JythonSandbox;
 
 import static spark.Spark.get;
 
 public class Runner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Runner.class);
-    private static RunnerService runnerService = new RunnerService();
-    private static StatusService statusService = new StatusService(runnerService);
+    private RunnerService runnerService;
+    private StatusService statusService;
+
+    public Runner(RunnerService runnerService, StatusService statusService) {
+        this.runnerService = runnerService;
+        this.statusService = statusService;
+    }
 
     public static void main(String[] args) {
 
-        setupTestersAPI();
+        JDBCServiceProvider jdbcServiceProvider = new JDBCServiceProvider();
+
+        RunnerService runnerService = new RunnerService(jdbcServiceProvider, jdbcServiceProvider);
+        StatusService statusService = new StatusService(runnerService);
+        Runner runner = new Runner(runnerService, statusService);
+
+        runner.setupTestersAPI();
         FilerMock filerMock = new FilerMock();
         filerMock.setupAPI();
         DBServiceMock dbServiceMock = new DBServiceMock();
@@ -24,7 +34,7 @@ public class Runner {
 
     }
 
-    private static void setupTestersAPI() {
+    private void setupTestersAPI() {
         Gson gson = new Gson();
         get("/solutions/:solution_id", (req, res) -> {
             String solutionId = req.params(":solution_id");
@@ -32,13 +42,7 @@ public class Runner {
 
             TaskStatus status = statusService.get(solutionId);
             if (status.isNotStarted()) {
-                String taskId = "";
-                try {
-                    taskId = Unirest.get("http://localhost:4567/solutions/" + solutionId + "/task_id").asJson().getBody().toString();
-                } catch (UnirestException e) {
-                    e.printStackTrace();
-                }
-                runnerService.submitTask(solutionId, taskId);
+                runnerService.submitTask(solutionId, new JythonSandbox());
                 status = new TaskStatus();
                 status.setInProgress();
             }

@@ -1,11 +1,10 @@
 package pl.edu.agh.to.testerka;
 
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import org.eclipse.jetty.util.ConcurrentHashSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pl.edu.agh.to.testerka.sandbox.Sandbox;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -16,14 +15,18 @@ public class RunnerService {
 
     private static final int THREADS_COUNT = 5;
     private ExecutorService executor = Executors.newFixedThreadPool(THREADS_COUNT);
-    Set<String> jobsInProgress = new HashSet<>();
+    Set<String> jobsInProgress = new ConcurrentHashSet<>();
+    private SaveResultService resultService;
+    private FileContentProvider contentProvider;
 
-    public RunnerService() {
+    public RunnerService(SaveResultService resultService, FileContentProvider contentProvider) {
+        this.resultService = resultService;
+        this.contentProvider = contentProvider;
     }
 
-    public void submitTask(String solutionId, String taskId) {
+    public void submitTask(String solutionId, Sandbox sandbox) {
         jobsInProgress.add(solutionId);
-        executor.submit(new RunnableSolution(solutionId, taskId));
+        executor.submit(new RunnableSolution(solutionId, sandbox));
         LOGGER.info("Submitted job for solution {}.", solutionId);
     }
 
@@ -33,35 +36,22 @@ public class RunnerService {
 
     private class RunnableSolution implements Runnable {
         private final String solutionId;
-        private String taskId;
+        private final Sandbox sandbox;
 
-        private RunnableSolution(String solutionId, String taskId) {
+        private RunnableSolution(String solutionId, Sandbox sandbox) {
             this.solutionId = solutionId;
-            this.taskId = taskId;
+            this.sandbox = sandbox;
         }
 
         @Override
         public void run() {
-            // TODO: get file contents via Filer
-            String fileContent = "";
-            String inputFile = "";
-            String outputFile = "";
-            try {
-                fileContent = Unirest.get("http://localhost:4567/mock/files/" + solutionId).asJson().getBody().toString();
-                inputFile = Unirest.get("http://localhost:4567/mock/tasks/" + taskId + "/in").asJson().getBody().toString();
-                outputFile = Unirest.get("http://localhost:4567/mock/tasks/" + taskId + "/out").asJson().getBody().toString();
-            } catch (UnirestException e) {
-                e.printStackTrace();
-            }
+            String fileContent = contentProvider.getSolutionContent(solutionId);
+            String inputFile = contentProvider.getInputFileContent(solutionId);
+            String outputFile = contentProvider.getOutputFileContent(solutionId);
 
-//             TODO: run in sandbox
-//             TODO: compare outputs, return result
-//            TestResult result = mockSandbox.execute(fileContent, inputFile, outputFile);
+            resultService.save(sandbox.execute(fileContent, inputFile, outputFile), solutionId);
 
-//             TODO: save result to DB
-//            Unirest.post("http://localhost:4567/mock/solutions/" + solutionId + "/result").field("result", result.toJson());
-
-            jobsInProgress.remove(this.solutionId);
+            jobsInProgress.remove(solutionId);
             LOGGER.info("Finished job for solution {}.", solutionId);
         }
     }
