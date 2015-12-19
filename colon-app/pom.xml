@@ -92,7 +92,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.0.5.Final</version>
+            <version>4.3.11.Final</version>
         </dependency>
 
         <!-- MySQL JDBC Driver -->
@@ -112,7 +112,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-c3p0</artifactId>
-            <version>5.0.5.Final</version>
+            <version>4.3.11.Final</version>
         </dependency>
 
     </dependencies>

@@ -19,7 +19,7 @@ public class HomeController {
 	public List<Student> findAll() {
 		Session session = HibernateUtils.getSession();
 		Transaction transaction = session.beginTransaction();
-		List<Student> studentList = session.createQuery("from " + Student.class.getName()).list();
+		List<Student> studentList = session.createQuery("from Student").list();
 		transaction.commit();
 		session.close();
 		return studentList;
