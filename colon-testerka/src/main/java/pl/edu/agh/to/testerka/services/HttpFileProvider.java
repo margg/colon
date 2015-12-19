@@ -1,8 +1,7 @@
-package pl.edu.agh.to.testerka.serviceImpl;
+package pl.edu.agh.to.testerka.services;
 
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import pl.edu.agh.to.testerka.FileContentProvider;
 
 public class HttpFileProvider implements FileContentProvider {
 

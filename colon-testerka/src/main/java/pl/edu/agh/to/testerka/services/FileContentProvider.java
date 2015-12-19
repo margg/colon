@@ -1,4 +1,4 @@
-package pl.edu.agh.to.testerka;
+package pl.edu.agh.to.testerka.services;
 
 public interface FileContentProvider {
 

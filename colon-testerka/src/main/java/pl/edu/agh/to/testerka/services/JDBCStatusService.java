@@ -1,6 +1,5 @@
-package pl.edu.agh.to.testerka.serviceImpl;
+package pl.edu.agh.to.testerka.services;
 
-import pl.edu.agh.to.testerka.StatusService;
 import pl.edu.agh.to.testerka.TaskStatus;
 import pl.edu.agh.to.testerka.sandbox.TestResultStatus;
 

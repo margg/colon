@@ -1,9 +1,6 @@
 package pl.edu.agh.to.testerka;
 
-import pl.edu.agh.to.testerka.serviceImpl.DBConnection;
-import pl.edu.agh.to.testerka.serviceImpl.HttpFileProvider;
-import pl.edu.agh.to.testerka.serviceImpl.JDBCSaveResultService;
-import pl.edu.agh.to.testerka.serviceImpl.JDBCStatusService;
+import pl.edu.agh.to.testerka.services.*;
 
 public class Runner {
 
@@ -13,8 +10,8 @@ public class Runner {
         FileContentProvider httpProvider = new HttpFileProvider("http://localhost:4567/mock/");
         RunnerService runnerService = new RunnerService(jdbcSaveResultService, httpProvider);
         StatusService statusService = new JDBCStatusService(new DBConnection());
-        TesterAPIService testerAPIService = new TesterAPIService(runnerService, statusService);
-        testerAPIService.setupTestersAPI();
+        TesterHttpHandler testerHttpHandler = new TesterHttpHandler(runnerService, statusService);
+        testerHttpHandler.setupTestersAPI();
 
         FilerMock filerMock = new FilerMock();
         filerMock.setupAPI();

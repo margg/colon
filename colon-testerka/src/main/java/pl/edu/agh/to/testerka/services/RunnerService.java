@@ -1,4 +1,4 @@
-package pl.edu.agh.to.testerka;
+package pl.edu.agh.to.testerka.services;
 
 import org.eclipse.jetty.util.ConcurrentHashSet;
 import org.slf4j.Logger;

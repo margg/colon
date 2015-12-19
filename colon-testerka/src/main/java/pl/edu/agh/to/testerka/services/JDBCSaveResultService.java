@@ -1,6 +1,5 @@
-package pl.edu.agh.to.testerka.serviceImpl;
+package pl.edu.agh.to.testerka.services;
 
-import pl.edu.agh.to.testerka.SaveResultService;
 import pl.edu.agh.to.testerka.sandbox.TestResult;
 
 import java.sql.*;

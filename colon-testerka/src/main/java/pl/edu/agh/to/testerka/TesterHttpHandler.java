@@ -4,16 +4,18 @@ import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.edu.agh.to.testerka.sandbox.JythonSandbox;
+import pl.edu.agh.to.testerka.services.RunnerService;
+import pl.edu.agh.to.testerka.services.StatusService;
 
 import static spark.Spark.get;
 
-public class TesterAPIService {
+public class TesterHttpHandler {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TesterAPIService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TesterHttpHandler.class);
     private RunnerService runnerService;
     private StatusService statusService;
 
-    public TesterAPIService(RunnerService runnerService, StatusService statusService) {
+    public TesterHttpHandler(RunnerService runnerService, StatusService statusService) {
         this.runnerService = runnerService;
         this.statusService = statusService;
     }

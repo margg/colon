@@ -1,4 +1,4 @@
-package pl.edu.agh.to.testerka.serviceImpl;
+package pl.edu.agh.to.testerka.services;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
