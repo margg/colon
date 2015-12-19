@@ -31,7 +31,7 @@ public class DBServiceMock {
 
         get("/mock/solutions/:solution_id/status", (req, res) -> {
             LOGGER.info("Received GET request for solution {} status.", req.params(":solution_id"));
-            String[] list = {"NOT_STARTED", "QUEUED"};
+            String[] list = {"NOT_TESTED", "QUEUED"};
             return list[new Random().nextInt(list.length)];
         });
 

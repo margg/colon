@@ -1,12 +1,18 @@
 package pl.edu.agh.to.testerka;
 
+import pl.edu.agh.to.testerka.serviceImpl.DBConnection;
+import pl.edu.agh.to.testerka.serviceImpl.HttpFileProvider;
+import pl.edu.agh.to.testerka.serviceImpl.JDBCSaveResultService;
+import pl.edu.agh.to.testerka.serviceImpl.JDBCStatusService;
+
 public class Runner {
 
     public static void main(String[] args) {
 
-        JDBCServiceProvider jdbcServiceProvider = new JDBCServiceProvider();
-        RunnerService runnerService = new RunnerService(jdbcServiceProvider, jdbcServiceProvider);
-        StatusService statusService = new JDBCStatusService();
+        JDBCSaveResultService jdbcSaveResultService = new JDBCSaveResultService(new DBConnection());
+        FileContentProvider httpProvider = new HttpFileProvider("http://localhost:4567/mock/");
+        RunnerService runnerService = new RunnerService(jdbcSaveResultService, httpProvider);
+        StatusService statusService = new JDBCStatusService(new DBConnection());
         TesterAPIService testerAPIService = new TesterAPIService(runnerService, statusService);
         testerAPIService.setupTestersAPI();
 

@@ -1,16 +1,22 @@
-package pl.edu.agh.to.testerka;
+package pl.edu.agh.to.testerka.serviceImpl;
 
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import pl.edu.agh.to.testerka.sandbox.TestResult;
+import pl.edu.agh.to.testerka.FileContentProvider;
 
-public class JDBCServiceProvider implements FileContentProvider, SaveResultService {
+public class HttpFileProvider implements FileContentProvider {
+
+    private String host;
+
+    public HttpFileProvider(String host) {
+        this.host = host;
+    }
 
     @Override
     public String getSolutionContent(String solutionId) {
         String fileContent = "";
         try {
-            fileContent = Unirest.get("http://localhost:4567/mock/files/" + solutionId).asJson().getBody().toString();
+            fileContent = Unirest.get(host + "files/" + solutionId).asJson().getBody().toString();
         } catch (UnirestException e) {
             e.printStackTrace();
         }
@@ -21,7 +27,7 @@ public class JDBCServiceProvider implements FileContentProvider, SaveResultServi
     public String getInputFileContent(String solutionId) {
         String inputFile = "";
         try {
-            inputFile = Unirest.get("http://localhost:4567/mock/solution/" + solutionId + "/in").asJson().getBody().toString();
+            inputFile = Unirest.get(host + "solution/" + solutionId + "/in").asJson().getBody().toString();
         } catch (UnirestException e) {
             e.printStackTrace();
         }
@@ -32,15 +38,10 @@ public class JDBCServiceProvider implements FileContentProvider, SaveResultServi
     public String getOutputFileContent(String solutionId) {
         String outputFile = "";
         try {
-            outputFile = Unirest.get("http://localhost:4567/mock/solution/" + solutionId + "/out").asJson().getBody().toString();
+            outputFile = Unirest.get(host + "solution/" + solutionId + "/out").asJson().getBody().toString();
         } catch (UnirestException e) {
             e.printStackTrace();
         }
         return outputFile;
-    }
-
-    @Override
-    public void save(TestResult result, String solutionId) {
-        Unirest.post("http://localhost:4567/mock/solutions/" + solutionId + "/result").field("result", result.toJson());
     }
 }

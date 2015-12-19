@@ -1,11 +1,12 @@
 package pl.edu.agh.to.testerka.sandbox;
 
 public enum TestResultStatus {
+    NOT_TESTED("NOT"),
     OK("OK"),
-    TimeLimitExceeded("TLE"),
-    Answer("ANS"),
-    RuntimeError("RTE");
-
+    TIME_LIMIT_EXCEEDED("TLE"),
+    ANSWER("ANS"),
+    RUNTIME_ERROR("RTE"),
+    REJECTED("REJ");
 
     private final String status;
 

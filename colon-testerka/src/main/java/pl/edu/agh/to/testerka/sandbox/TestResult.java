@@ -15,6 +15,14 @@ public class TestResult {
         this.executionTimeMillis = executionTimeMillis;
     }
 
+    public TestResultStatus getTestResultStatus() {
+        return testResultStatus;
+    }
+
+    public long getExecutionTimeMillis() {
+        return executionTimeMillis;
+    }
+
     public JsonObject toJson() {
         JsonObject testResultJson = new JsonObject();
         testResultJson.addProperty("status", testResultStatus.toString());

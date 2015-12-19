@@ -21,9 +21,9 @@ public class JythonSandbox implements Sandbox {
             TestResultStatus testResultStatus = getTestResultStatus(outputStream, correctOutput);
             return new TestResult(testResultStatus, codeExecutionTime);
         } catch (TimeLimitExceededException e) {
-            return new TestResult(TestResultStatus.TimeLimitExceeded);
+            return new TestResult(TestResultStatus.TIME_LIMIT_EXCEEDED);
         } catch (Exception e) {
-            return new TestResult(TestResultStatus.RuntimeError);
+            return new TestResult(TestResultStatus.RUNTIME_ERROR);
         }
     }
 
@@ -58,7 +58,7 @@ public class JythonSandbox implements Sandbox {
         if (codeOutput.equals(correctOutput)) {
             return TestResultStatus.OK;
         } else {
-            return TestResultStatus.Answer;
+            return TestResultStatus.ANSWER;
         }
     }
 }

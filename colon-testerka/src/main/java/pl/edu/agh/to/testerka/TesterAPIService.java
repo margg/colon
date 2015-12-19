@@ -23,18 +23,16 @@ public class TesterAPIService {
         get("/solutions/:solution_id", (req, res) -> {
             String solutionId = req.params(":solution_id");
             LOGGER.info("Received GET request for solution {}.", solutionId);
-            TaskStatus status = new TaskStatus();
 
             if (runnerService.isInProgress(solutionId)) {
-                status.setInProgress();
-            } else {
-                status = statusService.getStatusFor(solutionId);
+                return TaskStatus.IN_PROGRESS;
             }
 
-            if (status.isNotStarted()) {
+            TaskStatus status = statusService.getStatusFor(solutionId);
+
+            if (status == TaskStatus.NOT_TESTED) {
                 runnerService.submitTask(solutionId, new JythonSandbox());
-                status = new TaskStatus();
-                status.setInProgress();
+                return TaskStatus.IN_PROGRESS;
             }
             return status;
         }, gson::toJson);
