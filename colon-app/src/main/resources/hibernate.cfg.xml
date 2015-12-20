@@ -5,9 +5,9 @@
 <hibernate-configuration>
     <session-factory>
         <!-- set in persistence.HibernateUtils based on environment variables -->
-        <property name="hibernate.connection.url" />  <!-- default jdbc:mysql://localhost:3306/colon_dev -->
-        <property name="hibernate.connection.username" /> <!-- default root -->
-        <property name="hibernate.connection.password" /> <!-- default empty -->
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/colon_dev</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password"></property>
 
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 
