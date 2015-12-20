@@ -13,7 +13,7 @@ define([
 
         mainPage: function () {
             var mainPageView = new MainPageView({
-                el: $('.main-container')
+                el: $('.sub-cont')
             });
             mainPageView.render();
         }

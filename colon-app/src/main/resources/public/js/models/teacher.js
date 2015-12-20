@@ -2,8 +2,8 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'collections/group',
-    'models/task'
+    'group',
+    'task'
 ], function($, _, Backbone, Group, Task) {
     var Teacher = Backbone.Model.extend({
         defaults: {

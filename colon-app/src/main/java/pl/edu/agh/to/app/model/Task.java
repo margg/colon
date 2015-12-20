@@ -1,12 +1,19 @@
 package pl.edu.agh.to.app.model;
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class Task {
 
+    @JsonBackReference
     private Teacher teacher;
+    @JsonManagedReference
     private Map<Group, Date> dates;
     private int timeLimit;
     private String testInput;
@@ -23,6 +30,7 @@ public class Task {
     public Task() {
     }
 
+    @JsonBackReference
     public Teacher getTeacher() {
         return teacher;
     }
