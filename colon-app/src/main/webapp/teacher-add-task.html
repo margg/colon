@@ -35,7 +35,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="#">My tasks</a></li>
-                    <li><a href="#">My classes</a></li>
+                    <li><a href="#">My groups</a></li>
                     <li><a href="#">My account</a></li>
                 </ul>
                 <button type="button" class="btn btn-default navbar-btn navbar-right">Log out</button>
@@ -55,9 +55,20 @@
                 <label for="taskDescription">Description</label>
                 <textarea class="form-control" id="taskDescription" rows="2" style="resize: none"></textarea>
             </div>
-            <div class="form-group">
-                <label for="dueDate">Due date</label>
-                <input type="datetime" class="form-control" id="dueDate" placeholder="dd/mm/yyyy">
+            <div class="form-inline inline-elements">
+                <div class="form-group">
+                    <label for="teacherGroups">Group</label>
+                    <select class="form-control" id="teacherGroups">
+                        <option>Group1</option>
+                        <option>Group2</option>
+                        <option>Group3</option>
+                        <option>Group4</option>
+                    </select>
+                </div>
+                <div class="form-group inline-second-element">
+                    <label for="dueDate">Due date</label>
+                    <input type="datetime" class="form-control" id="dueDate" placeholder="dd/mm/yyyy">
+                </div>
             </div>
             <div class="form-group">
                 <label for="maxExTime">Maximum execution time</label>

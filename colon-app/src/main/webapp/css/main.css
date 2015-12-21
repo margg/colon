@@ -24,6 +24,14 @@ form{
     margin: 10px 0;
 }
 
+.inline-elements {
+    margin-bottom: 15px;
+}
+
+.inline-second-element {
+    margin-left: 10px;
+}
+
 #main-logo {
     font-weight: bold;
     font-size: 40px;
