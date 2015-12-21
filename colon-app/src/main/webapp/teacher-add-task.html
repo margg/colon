@@ -65,9 +65,12 @@
                         <option>Group4</option>
                     </select>
                 </div>
-                <div class="form-group inline-second-element">
+                <div class="form-group inline-next-element">
                     <label for="dueDate">Due date</label>
                     <input type="datetime" class="form-control" id="dueDate" placeholder="dd/mm/yyyy">
+                </div>
+                <div class="form-group">
+                    <p id="add-new-click">(+)</p>
                 </div>
             </div>
             <div class="form-group">
@@ -91,9 +94,13 @@
     <hr>
     <footer>© Colon team</footer>
 </div>
-
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
 <script data-main="js/bootstrap" src="js/vendor/require.js"></script>
+
+<script>
+    $( "#add-new-click" ).click(function() {
+        $( "#add-new-click" ).parents().find(".inline-elements").append('<div class="form-group"> <label for="teacherGroups">Group</label> <select class="form-control" id="teacherGroups"> <option>Group1</option> <option>Group2</option> <option>Group3</option> <option>Group4</option> </select> </div> <div class="form-group inline-next-element"> <label for="dueDate">Due date</label> <input type="datetime" class="form-control" id="dueDate" placeholder="dd/mm/yyyy"> </div>');
+    });</script>
 </body>
 </html>

@@ -28,8 +28,9 @@ form{
     margin-bottom: 15px;
 }
 
-.inline-second-element {
+.inline-next-element {
     margin-left: 10px;
+    width: 50%;
 }
 
 #main-logo {
@@ -46,4 +47,13 @@ form{
 
 #button-ok {
     margin-left: 230px;
+}
+
+#dueDate {
+    width: 50%;
+}
+
+#add-new-click {
+    cursor: pointer;
+    margin: auto;
 }
