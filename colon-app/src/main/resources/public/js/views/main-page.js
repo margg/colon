@@ -8,13 +8,7 @@ define([
     var MainPageView = Backbone.View.extend({
 
         render: function(){
-            debugger
-            $.get('api/teacher').done(function(data){
-                this.$el.html(_.template(mainPageTemplate));
-                var group = new Group(data.groups[0]);
-                debugger;
-            }.bind(this));
-
+            this.$el.html(_.template(mainPageTemplate));
         }
     });
     return MainPageView;
