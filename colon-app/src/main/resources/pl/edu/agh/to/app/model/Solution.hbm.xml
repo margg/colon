@@ -9,10 +9,12 @@
         <id name="id">
             <generator class="native" />
         </id>
-        <property name="execTime" type="integer" column="exec_time" not-null="false" />
+
         <property name="status" type="string" column="status" not-null="false" />
+        <property name="execTime" type="integer" column="exec_time" not-null="false" />
         <many-to-one name="author" class="Student" column="student_id" not-null="true" />
         <many-to-one name="task" class="Task" column="task_id" not-null="true" />
+        <property name="filePath" type="string" column="file_path" not-null="false" />
     </class>
 
 </hibernate-mapping>

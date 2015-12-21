@@ -9,10 +9,12 @@
         <id name="id">
             <generator class="native" />
         </id>
-        <property name="firstName" type="string" column="first_name" />
-        <property name="lastName" type="string" column="last_name" />
+
         <property name="username" type="string" column="username" not-null="true" />
         <property name="password" type="string" column="password" not-null="true" />
+
+        <property name="firstName" type="string" column="first_name" not-null="false" />
+        <property name="lastName" type="string" column="last_name" not-null="false" />
     </class>
 
 </hibernate-mapping>

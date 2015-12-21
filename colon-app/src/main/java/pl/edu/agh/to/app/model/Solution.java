@@ -8,6 +8,7 @@ public class Solution {
     private User author;
     private Task task;
     private String code;
+    private String filePath;
 
     public Solution(int execTime, String status, User author, Task task, String code) {
         this.execTime = execTime;
@@ -66,5 +67,13 @@ public class Solution {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 }

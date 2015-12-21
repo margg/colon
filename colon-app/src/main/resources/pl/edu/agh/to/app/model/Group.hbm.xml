@@ -9,8 +9,11 @@
         <id name="id">
             <generator class="native" />
         </id>
-        <property name="name" type="string" column="name" />
+
+        <property name="name" type="string" column="name" not-null="true" />
+
         <many-to-one name="teacher" column="teacher_id" not-null="true" class="Teacher" />
+
         <set name="students" inverse="true">
             <key column="group_id" />
             <one-to-many class="Student" />

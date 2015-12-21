@@ -20,6 +20,8 @@ public class Task {
     private int timeLimit;
     private String testInput;
     private String testOutput;
+    private String inFilePath;
+    private String outFilePath;
 
     public Task(Teacher teacher, Map<Group, Date> dates, int timeLimit, String testInput, String testOutput) {
         this.teacher = teacher;
@@ -81,6 +83,21 @@ public class Task {
         this.timeLimit = timeLimit;
     }
 
+    public String getInFilePath() {
+        return inFilePath;
+    }
+
+    public void setInFilePath(String inFilePath) {
+        this.inFilePath = inFilePath;
+    }
+
+    public String getOutFilePath() {
+        return outFilePath;
+    }
+
+    public void setOutFilePath(String outFilePath) {
+        this.outFilePath = outFilePath;
+    }
 
     // These should load test files from colon-files
     public String getTestInput() {
