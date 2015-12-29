@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.util.List;
 
 public class Group {
-
+    private long id;
     private String name;
     @JsonBackReference
     private Teacher teacher;
@@ -19,6 +19,11 @@ public class Group {
 
     public Group() {
     }
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
     @JsonBackReference
     public Teacher getTeacher() {
@@ -35,15 +40,6 @@ public class Group {
 
     public void setStudents(List<Student> students) {
         this.students = students;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
 }
