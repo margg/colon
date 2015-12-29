@@ -2,13 +2,13 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'views/main-page'
-], function ($, _, Backbone, MainPageView) {
+    'views/main-page',
+    'views/new-solution'
+], function ($, _, Backbone, MainPageView, NewSolutionView) {
     var AppRouter = Backbone.Router.extend({
         routes: {
-            '!': 'mainPage',
-            '!/': 'mainPage',
-            '!ss': 'mainPage'
+            '!/solutions/new': 'newSolution',
+            '!': 'mainPage'
         },
 
         mainPage: function () {
@@ -16,6 +16,13 @@ define([
                 el: $('.sub-cont')
             });
             mainPageView.render();
+        },
+
+        newSolution: function() {
+            var newSolutionView = new NewSolutionView({
+                el: $('.sub-cont')
+            });
+            newSolutionView.render();
         }
 
     });
