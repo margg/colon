@@ -1,10 +1,14 @@
 package pl.edu.agh.to.testerka.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.edu.agh.to.testerka.sandbox.TestResult;
 
 import java.sql.*;
 
 public class JDBCSaveResultService implements SaveResultService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(JDBCSaveResultService.class);
 
     private DBConnection dbConnection;
 
@@ -23,7 +27,7 @@ public class JDBCSaveResultService implements SaveResultService {
             preparedStatement.setNString(3, solutionId);
             preparedStatement.executeUpdate();
         } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.error("Error while saving result to DB.", e);
         }
 
     }

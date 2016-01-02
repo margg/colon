@@ -1,5 +1,7 @@
 package pl.edu.agh.to.testerka.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.edu.agh.to.testerka.TaskStatus;
 import pl.edu.agh.to.testerka.sandbox.TestResultStatus;
 
@@ -11,6 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JDBCStatusService implements StatusService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(JDBCStatusService.class);
 
     private DBConnection dbConnection;
     private Map<Integer, TestResultStatus> statusMap = new HashMap<>();
@@ -38,7 +42,7 @@ public class JDBCStatusService implements StatusService {
             testResultStatus = statusMap.get(dbStatus);
 
         } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.error("Error while getting status for solution " + solutionId, e);
         }
 
         if(testResultStatus == TestResultStatus.NOT_TESTED) {

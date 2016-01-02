@@ -2,8 +2,12 @@ package pl.edu.agh.to.testerka.services;
 
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HttpFileProvider implements FileContentProvider {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpFileProvider.class);
 
     private String host;
 
@@ -17,7 +21,7 @@ public class HttpFileProvider implements FileContentProvider {
         try {
             fileContent = Unirest.get(host + "files/" + solutionId).asJson().getBody().toString();
         } catch (UnirestException e) {
-            e.printStackTrace();
+            LOGGER.error("Error while getting solution content.", e);
         }
         return fileContent;
     }
@@ -28,7 +32,7 @@ public class HttpFileProvider implements FileContentProvider {
         try {
             inputFile = Unirest.get(host + "solution/" + solutionId + "/in").asJson().getBody().toString();
         } catch (UnirestException e) {
-            e.printStackTrace();
+            LOGGER.error("Error while getting input file content.", e);
         }
         return inputFile;
     }
@@ -39,7 +43,7 @@ public class HttpFileProvider implements FileContentProvider {
         try {
             outputFile = Unirest.get(host + "solution/" + solutionId + "/out").asJson().getBody().toString();
         } catch (UnirestException e) {
-            e.printStackTrace();
+            LOGGER.error("Error while getting output file content.", e);
         }
         return outputFile;
     }

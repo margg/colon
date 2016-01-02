@@ -12,6 +12,7 @@ import static spark.Spark.get;
 public class TesterHttpHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TesterHttpHandler.class);
+
     private RunnerService runnerService;
     private StatusService statusService;
 
