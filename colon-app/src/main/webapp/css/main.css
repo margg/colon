@@ -24,6 +24,10 @@ form{
     margin-top: 10px;
 }
 
+.panel-heading {
+    font-size: 20px;
+}
+
 .input-login {
     margin: 10px 0;
 }
@@ -35,6 +39,9 @@ form{
 .inline-next-element {
     margin-left: 10px;
     width: 50%;
+}
+.p-info {
+    margin-left: 10px;
 }
 
 #main-logo {
@@ -60,8 +67,4 @@ form{
 #add-new-click {
     cursor: pointer;
     margin: auto;
-}
-
-.panel-heading {
-    font-size: 20px;
 }
