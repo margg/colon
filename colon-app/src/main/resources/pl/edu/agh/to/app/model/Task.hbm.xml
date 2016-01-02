@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="pl.edu.agh.to.app.model">
+
+    <class name="Task" table="tasks">
+        <id name="id">
+            <generator class="native" />
+        </id>
+        <property name="name" type="string" column="name" not-null="true" />
+        <property name="description" type="text" column="description" not-null="true" />
+        <many-to-one name="teacher" column="teacher_id" not-null="true" class="Teacher" />
+        <map name="dates" table="task_dates">
+            <key column="id" />
+            <index-many-to-many class="Group" column="group_id" />
+            <element column="due_date" type="date" />
+        </map>
+        <property name="timeLimit" type="integer" column="time_limit" not-null="true" />
+        <property name="inFilePath" column="in_file_path" type="string" not-null="false" />
+        <property name="outFilePath" column="out_file_path" type="string" not-null="false" />
+    </class>
+
+</hibernate-mapping>
