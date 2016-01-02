@@ -2,7 +2,7 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'task'
+    'models/task'
 ], function ($, _, Backbone, Task) {
     var Solution = Backbone.Model.extend({
         defaults: {

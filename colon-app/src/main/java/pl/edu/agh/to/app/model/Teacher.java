@@ -1,7 +1,6 @@
 package pl.edu.agh.to.app.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.codehaus.jackson.annotate.JsonIgnore;
 
 import java.util.List;
 
