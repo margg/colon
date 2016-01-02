@@ -20,6 +20,10 @@ form{
     width: 50%;
 }
 
+.panel-default {
+    margin-top: 10px;
+}
+
 .input-login {
     margin: 10px 0;
 }
@@ -56,4 +60,8 @@ form{
 #add-new-click {
     cursor: pointer;
     margin: auto;
+}
+
+.panel-heading {
+    font-size: 20px;
 }
