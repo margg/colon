@@ -5,3 +5,4 @@ dbUsername=<<dbUsername>>
 dbPassword=<<dbPassword>>
 filerHostAddress=<<filerHostAddress>>
 filerPort=<<filerPort>>
+schedulerPeriodInMinutes=<<schedulerPeriodInMinutes>>

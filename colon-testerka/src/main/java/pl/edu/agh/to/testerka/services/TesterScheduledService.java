@@ -10,10 +10,15 @@ public class TesterScheduledService extends AbstractScheduledService {
 
     private SolutionProvider solutionProvider;
     private RunnerService runnerService;
+    private int period;
+    private TimeUnit timeUnit;
 
-    public TesterScheduledService(SolutionProvider solutionProvider, RunnerService runnerService) {
+    public TesterScheduledService(SolutionProvider solutionProvider, RunnerService runnerService, int period,
+                                  TimeUnit timeUnit) {
         this.solutionProvider = solutionProvider;
         this.runnerService = runnerService;
+        this.period = period;
+        this.timeUnit = timeUnit;
     }
 
     @Override
@@ -23,7 +28,7 @@ public class TesterScheduledService extends AbstractScheduledService {
 
     @Override
     protected Scheduler scheduler() {
-        return Scheduler.newFixedRateSchedule(0, 30, TimeUnit.MINUTES);
+        return Scheduler.newFixedRateSchedule(0, period, timeUnit);
     }
 
     private void runUntestedSolutions() {

@@ -7,11 +7,13 @@ import pl.edu.agh.to.testerka.services.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class Runner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Runner.class);
     private static final String PROPERTIES_FILEPATH = "./colon-testerka/src/main/resources/application.properties";
+    private static TimeUnit timeUnit = TimeUnit.MINUTES;
 
     public static void main(String[] args) {
 
@@ -31,6 +33,8 @@ public class Runner {
         String filerHostAddress = properties.getProperty("filerHostAddress");
         String filerPort = properties.getProperty("filerPort");
 
+        Integer periodInMinutes = Integer.valueOf(properties.getProperty("schedulerPeriodInMinutes"));
+
         JDBCSaveResultService jdbcSaveResultService =
                 new JDBCSaveResultService(new DBConnection(dbHostAddress, dbPort, dbName, dbUsername, dbPassword));
         FileContentProvider httpProvider = new HttpFileProvider(filerHostAddress + ":" + filerPort);
@@ -46,7 +50,8 @@ public class Runner {
         dbServiceMock.setupAPI();
 
         TesterScheduledService testerScheduledService = new TesterScheduledService(
-                new JDBCSolutionProvider(new DBConnection(dbHostAddress, dbPort, dbName, dbUsername, dbPassword)), runnerService);
+                new JDBCSolutionProvider(new DBConnection(dbHostAddress, dbPort, dbName, dbUsername, dbPassword)),
+                runnerService, periodInMinutes, timeUnit);
         testerScheduledService.startAsync();
     }
 }
