@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +22,13 @@ public class Task {
     private String testOutput;
     private String inFilePath;
     private String outFilePath;
+    @JsonManagedReference
+    private List<Solution> solutions = new ArrayList<Solution>();
 
-    public Task(Teacher teacher, Map<Group, Date> dates, int timeLimit, String testInput, String testOutput) {
+    public Task(long id, String name, String description, Teacher teacher, Map<Group, Date> dates, int timeLimit, String testInput, String testOutput) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
         this.teacher = teacher;
         this.dates = dates;
         this.timeLimit = timeLimit;
@@ -115,4 +121,13 @@ public class Task {
     public void setTestOutput(String testOutput) {
         this.testOutput = testOutput;
     }
+
+    public List<Solution> getSolutions() {
+        return solutions;
+    }
+
+    public void setSolutions(List<Solution> solutions) {
+        this.solutions = solutions;
+    }
+
 }

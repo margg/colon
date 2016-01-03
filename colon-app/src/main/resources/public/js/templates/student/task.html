@@ -1,0 +1,13 @@
+<h4>Add new solution</h4>
+<p><b>Task name</b></p>
+<p class="p-info"><%= model.get('name') %></p>
+<p><b>Task description</b></p>
+<p class="p-info"><%= model.get('description') %> </p>
+<form>
+    <div class="form-group">
+        <label for="solutionFile">File with solution</label>
+        <input type="file" id="solutionFile">
+        <p class="help-block">.py file</p>
+    </div>
+    <button type="submit" class="btn btn-default btn-primary">Submit</button>
+</form>

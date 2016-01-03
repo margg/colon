@@ -3,11 +3,13 @@ define([
     'underscore',
     'backbone',
     'views/main-page',
-    'views/new-solution'
-], function ($, _, Backbone, MainPageView, NewSolutionView) {
+    'views/student/tasks',
+    'views/student/task'
+], function ($, _, Backbone, MainPageView, StudentTasksView, StudentTaskView) {
     var AppRouter = Backbone.Router.extend({
         routes: {
-            '!/solutions/new': 'newSolution',
+            '!/tasks': 'showTasks',
+            '!/tasks/:id': 'showTask',
             '!': 'mainPage'
         },
 
@@ -18,11 +20,19 @@ define([
             mainPageView.render();
         },
 
-        newSolution: function() {
-            var newSolutionView = new NewSolutionView({
+        showTasks: function() {
+            var studentTasksView = new StudentTasksView({
                 el: $('.sub-cont')
             });
-            newSolutionView.render();
+            studentTasksView.render();
+        },
+
+        showTask: function(id) {
+            var studentTaskView = new StudentTaskView({
+                el: $('.sub-cont'),
+                id: id
+            });
+            studentTaskView.render();
         }
 
     });
