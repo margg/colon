@@ -17,16 +17,16 @@ public class JDBCStatusService implements StatusService {
     private static final Logger LOGGER = LoggerFactory.getLogger(JDBCStatusService.class);
 
     private DBConnection dbConnection;
-    private Map<Integer, TestResultStatus> statusMap = new HashMap<>();
+    private Map<String, TestResultStatus> statusMap = new HashMap<>();
 
     public JDBCStatusService(DBConnection dbConnection) {
         this.dbConnection = dbConnection;
-        statusMap.put(0, TestResultStatus.NOT_TESTED);
-        statusMap.put(1, TestResultStatus.OK);
-        statusMap.put(2, TestResultStatus.TIME_LIMIT_EXCEEDED);
-        statusMap.put(3, TestResultStatus.ANSWER);
-        statusMap.put(4, TestResultStatus.RUNTIME_ERROR);
-        statusMap.put(5, TestResultStatus.REJECTED);
+        statusMap.put(null, TestResultStatus.NOT_TESTED);
+        statusMap.put("OK", TestResultStatus.OK);
+        statusMap.put("TLE", TestResultStatus.TIME_LIMIT_EXCEEDED);
+        statusMap.put("ANS", TestResultStatus.ANSWER);
+        statusMap.put("RTE", TestResultStatus.RUNTIME_ERROR);
+        statusMap.put("REJ", TestResultStatus.REJECTED);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class JDBCStatusService implements StatusService {
             if (!resultSet.next()) {
                 return TaskStatus.NON_EXISTING;
             }
-            int dbStatus = resultSet.getInt("status");
+            String dbStatus = resultSet.getString("status");
             testResultStatus = statusMap.get(dbStatus);
 
         } catch (SQLException | ClassNotFoundException e) {
