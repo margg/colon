@@ -10,8 +10,6 @@
     <artifactId>colon-testerka</artifactId>
     <packaging>war</packaging>
     <name>colon-testerka</name>
-    <url>http://maven.apache.org</url>
-
 
     <dependencies>
         <dependency>
