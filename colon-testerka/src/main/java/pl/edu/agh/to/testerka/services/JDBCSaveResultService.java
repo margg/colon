@@ -20,7 +20,7 @@ public class JDBCSaveResultService implements SaveResultService {
     public void save(TestResult result, String solutionId) {
 
         try (Connection connection = dbConnection.getConnection()){
-            String query = "UPDATE Solutions SET status = ? , execution_time = ? where solution_id = ?";
+            String query = "UPDATE solutions SET status = ? , exec_time = ? where id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, result.getTestResultStatus().ordinal());
             preparedStatement.setInt(2, (int) result.getExecutionTimeMillis());
@@ -29,7 +29,5 @@ public class JDBCSaveResultService implements SaveResultService {
         } catch (SQLException | ClassNotFoundException e) {
             LOGGER.error("Error while saving result to DB.", e);
         }
-
     }
-
 }

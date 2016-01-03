@@ -4,5 +4,6 @@ public enum TaskStatus {
 
     NOT_TESTED,
     IN_PROGRESS,
-    TESTED
+    TESTED,
+    NON_EXISTING,
 }

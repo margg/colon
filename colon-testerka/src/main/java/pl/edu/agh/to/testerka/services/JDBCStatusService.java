@@ -27,17 +27,19 @@ public class JDBCStatusService implements StatusService {
         statusMap.put(3, TestResultStatus.ANSWER);
         statusMap.put(4, TestResultStatus.RUNTIME_ERROR);
         statusMap.put(5, TestResultStatus.REJECTED);
-
     }
 
     @Override
     public TaskStatus getStatusFor(String solutionId) {
         TestResultStatus testResultStatus = null;
         try(Connection connection = dbConnection.getConnection()) {
-            String query = "SELECT status from Solutions where solution_id = ?";
+            String query = "SELECT status from solutions where id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setNString(1, solutionId);
             ResultSet resultSet = preparedStatement.executeQuery();
+            if (!resultSet.next()) {
+                return TaskStatus.NON_EXISTING;
+            }
             int dbStatus = resultSet.getInt("status");
             testResultStatus = statusMap.get(dbStatus);
 
