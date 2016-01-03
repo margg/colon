@@ -17,13 +17,13 @@ public class JDBCSaveResultService implements SaveResultService {
     }
 
     @Override
-    public void save(TestResult result, String solutionId) {
+    public void save(TestResult result, Integer solutionId) {
         try (Connection connection = dbConnection.getConnection()) {
             String query = "UPDATE solutions SET status = ? , exec_time = ? WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, result.getTestResultStatus().toString());
             preparedStatement.setInt(2, (int) result.getExecutionTimeMillis());
-            preparedStatement.setString(3, solutionId);
+            preparedStatement.setInt(3, solutionId);
             preparedStatement.executeUpdate();
         } catch (SQLException | ClassNotFoundException e) {
             LOGGER.error("Error while saving result to DB.", e);

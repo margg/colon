@@ -2,9 +2,9 @@ package pl.edu.agh.to.testerka.services;
 
 public interface FileContentProvider {
 
-    String getSolutionContent(String solutionId);
+    String getSolutionContent(Integer solutionId);
 
-    String getInputFileContent(String solutionId);
+    String getInputFileContent(Integer solutionId);
 
-    String getOutputFileContent(String solutionId);
+    String getOutputFileContent(Integer solutionId);
 }

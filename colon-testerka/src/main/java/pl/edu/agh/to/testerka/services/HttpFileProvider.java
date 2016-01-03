@@ -16,7 +16,7 @@ public class HttpFileProvider implements FileContentProvider {
     }
 
     @Override
-    public String getSolutionContent(String solutionId) {
+    public String getSolutionContent(Integer solutionId) {
         String fileContent = "";
         try {
             fileContent = Unirest.get(host + "files/" + solutionId).asJson().getBody().toString();
@@ -27,7 +27,7 @@ public class HttpFileProvider implements FileContentProvider {
     }
 
     @Override
-    public String getInputFileContent(String solutionId) {
+    public String getInputFileContent(Integer solutionId) {
         String inputFile = "";
         try {
             inputFile = Unirest.get(host + "solution/" + solutionId + "/in").asJson().getBody().toString();
@@ -38,7 +38,7 @@ public class HttpFileProvider implements FileContentProvider {
     }
 
     @Override
-    public String getOutputFileContent(String solutionId) {
+    public String getOutputFileContent(Integer solutionId) {
         String outputFile = "";
         try {
             outputFile = Unirest.get(host + "solution/" + solutionId + "/out").asJson().getBody().toString();

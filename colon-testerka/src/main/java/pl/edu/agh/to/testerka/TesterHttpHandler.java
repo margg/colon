@@ -25,17 +25,17 @@ public class TesterHttpHandler {
 
         Gson gson = new Gson();
         get("/solutions/:solution_id", (req, res) -> {
-            String solutionId = req.params(":solution_id");
+            Integer solutionId = Integer.valueOf(req.params(":solution_id"));
             LOGGER.info("Received GET request for solution {}.", solutionId);
 
             if (runnerService.isInProgress(solutionId)) {
                 return TaskStatus.IN_PROGRESS;
             }
 
-            TaskStatus status = statusService.getStatusFor(solutionId);
+            TaskStatus status = statusService.getStatusFor(Integer.valueOf(solutionId));
 
             if (status == TaskStatus.NOT_TESTED) {
-                runnerService.submitTask(solutionId, new JythonSandbox());
+                runnerService.submitTask(Integer.valueOf(solutionId), new JythonSandbox());
                 return TaskStatus.IN_PROGRESS;
             }
             return status;

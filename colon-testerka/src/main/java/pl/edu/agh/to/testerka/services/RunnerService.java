@@ -15,7 +15,7 @@ public class RunnerService {
 
     private static final int THREADS_COUNT = 5;
     private ExecutorService executor = Executors.newFixedThreadPool(THREADS_COUNT);
-    Set<String> jobsInProgress = new ConcurrentHashSet<>();
+    Set<Integer> jobsInProgress = new ConcurrentHashSet<>();
     private SaveResultService resultService;
     private FileContentProvider contentProvider;
 
@@ -24,21 +24,21 @@ public class RunnerService {
         this.contentProvider = contentProvider;
     }
 
-    public void submitTask(String solutionId, Sandbox sandbox) {
+    public synchronized void submitTask(Integer solutionId, Sandbox sandbox) {
         jobsInProgress.add(solutionId);
         executor.submit(new RunnableSolution(solutionId, sandbox));
         LOGGER.info("Submitted job for solution {}.", solutionId);
     }
 
-    public boolean isInProgress(String solutionId) {
+    public boolean isInProgress(Integer solutionId) {
         return jobsInProgress.contains(solutionId);
     }
 
     private class RunnableSolution implements Runnable {
-        private final String solutionId;
+        private final Integer solutionId;
         private final Sandbox sandbox;
 
-        private RunnableSolution(String solutionId, Sandbox sandbox) {
+        private RunnableSolution(Integer solutionId, Sandbox sandbox) {
             this.solutionId = solutionId;
             this.sandbox = sandbox;
         }

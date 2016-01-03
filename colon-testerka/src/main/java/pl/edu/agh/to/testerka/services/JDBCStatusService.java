@@ -31,12 +31,12 @@ public class JDBCStatusService implements StatusService {
     }
 
     @Override
-    public TaskStatus getStatusFor(String solutionId) {
+    public TaskStatus getStatusFor(Integer solutionId) {
         TestResultStatus testResultStatus = null;
         try(Connection connection = dbConnection.getConnection()) {
             String query = "SELECT status FROM solutions WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, solutionId);
+            preparedStatement.setInt(1, solutionId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (!resultSet.next()) {
                 return TaskStatus.NON_EXISTING;
