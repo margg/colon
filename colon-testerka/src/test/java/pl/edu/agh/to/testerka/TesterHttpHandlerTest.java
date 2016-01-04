@@ -34,53 +34,62 @@ public class TesterHttpHandlerTest {
 
     @Test
     public void testGetRequestOfTaskInProgress() throws Exception {
+        // given
         int id = 1;
         when(runnerServiceMock.isInProgress(id)).thenReturn(true);
 
+        // when
         Response resp = get(FULL_ADDRESS + "/solutions/" + id);
 
+        // then
         assertThat(resp.asString()).isEqualTo("\"" + TaskStatus.IN_PROGRESS.toString() + "\"");
         assertThat(resp.getStatusCode()).isEqualTo(200);
     }
 
     @Test
     public void testGetRequestOfNotTestedTask() throws Exception {
+        // given
         int id = 2;
         when(runnerServiceMock.isInProgress(id)).thenReturn(false);
         when(statusServiceMock.getStatusFor(id)).thenReturn(TaskStatus.NOT_TESTED);
 
+        // when
         Response resp = get(FULL_ADDRESS + "/solutions/" + id);
 
+        // then
         verify(runnerServiceMock, times(1)).submitTask(eq(id), any(Sandbox.class));
-
         assertThat(resp.asString()).isEqualTo("\"" + TaskStatus.IN_PROGRESS.toString() + "\"");
         assertThat(resp.getStatusCode()).isEqualTo(200);
     }
 
     @Test
     public void testGetRequestOfTestedTask() throws Exception {
+        // given
         int id = 3;
         when(runnerServiceMock.isInProgress(id)).thenReturn(false);
         when(statusServiceMock.getStatusFor(id)).thenReturn(TaskStatus.TESTED);
 
+        // when
         Response resp = get(FULL_ADDRESS + "/solutions/" + id);
 
+        // then
         verify(runnerServiceMock, never()).submitTask(eq(id), any(Sandbox.class));
-
         assertThat(resp.asString()).isEqualTo("\"" + TaskStatus.TESTED.toString() + "\"");
         assertThat(resp.getStatusCode()).isEqualTo(200);
     }
 
     @Test
     public void testGetRequestOfNonExistingTask() throws Exception {
+        // given
         int id = 3;
         when(runnerServiceMock.isInProgress(id)).thenReturn(false);
         when(statusServiceMock.getStatusFor(id)).thenReturn(TaskStatus.NON_EXISTING);
 
+        // when
         Response resp = get(FULL_ADDRESS + "/solutions/" + id);
 
+        // then
         verify(runnerServiceMock, never()).submitTask(eq(id), any(Sandbox.class));
-
         assertThat(resp.asString()).isEqualTo("\"" + TaskStatus.NON_EXISTING.toString() + "\"");
         assertThat(resp.getStatusCode()).isEqualTo(200);
     }
