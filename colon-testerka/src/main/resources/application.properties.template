@@ -6,3 +6,4 @@ dbPassword=<<dbPassword>>
 filerHostAddress=<<filerHostAddress>>
 filerPort=<<filerPort>>
 schedulerPeriodInMinutes=<<schedulerPeriodInMinutes>>
+testerkaPort=<<testerkaPort>>

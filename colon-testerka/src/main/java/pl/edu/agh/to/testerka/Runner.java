@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.edu.agh.to.testerka.services.*;
 
+import static spark.Spark.setPort;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -18,7 +20,7 @@ public class Runner {
     public static void main(String[] args) {
 
         Properties properties = new Properties();
-        try(FileInputStream in = new FileInputStream(PROPERTIES_FILEPATH)) {
+        try (FileInputStream in = new FileInputStream(PROPERTIES_FILEPATH)) {
             properties.load(in);
         } catch (IOException e) {
             LOGGER.error("Error while loading properties.", e);
@@ -34,6 +36,9 @@ public class Runner {
         String filerPort = properties.getProperty("filerPort");
 
         Integer periodInMinutes = Integer.valueOf(properties.getProperty("schedulerPeriodInMinutes"));
+        String testerkaPort = properties.getProperty("testerkaPort");
+
+        setPort(Integer.valueOf(testerkaPort));
 
         JDBCSaveResultService jdbcSaveResultService =
                 new JDBCSaveResultService(new DBConnection(dbHostAddress, dbPort, dbName, dbUsername, dbPassword));

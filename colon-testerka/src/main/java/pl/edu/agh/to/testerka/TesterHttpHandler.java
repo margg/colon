@@ -31,11 +31,10 @@ public class TesterHttpHandler {
             if (runnerService.isInProgress(solutionId)) {
                 return TaskStatus.IN_PROGRESS;
             }
-
-            TaskStatus status = statusService.getStatusFor(Integer.valueOf(solutionId));
+            TaskStatus status = statusService.getStatusFor(solutionId);
 
             if (status == TaskStatus.NOT_TESTED) {
-                runnerService.submitTask(Integer.valueOf(solutionId), new JythonSandbox());
+                runnerService.submitTask(solutionId, new JythonSandbox());
                 return TaskStatus.IN_PROGRESS;
             }
             return status;
