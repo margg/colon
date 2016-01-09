@@ -3,15 +3,16 @@ package pl.edu.agh.to.app.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
+import java.util.Set;
 
 public class Teacher extends User {
 
     @JsonManagedReference
-    private List<Group> groups;
+    private Set<Group> groups;
     @JsonManagedReference
-    private List<Task> tasks;
+    private Set<Task> tasks;
 
-    public Teacher(String firstName, String lastName, String username, String password, List<Group> groups, List<Task> tasks) {
+    public Teacher(String firstName, String lastName, String username, String password, Set<Group> groups, Set<Task> tasks) {
         super(firstName, lastName, username, password);
         this.groups = groups;
         this.tasks = tasks;
@@ -22,20 +23,37 @@ public class Teacher extends User {
 
 
     @JsonManagedReference
-    public List<Group> getGroups() {
+    public Set<Group> getGroups() {
         return groups;
     }
 
-    public void setGroups(List<Group> groups) {
+    public void setGroups(Set<Group> groups) {
         this.groups = groups;
     }
 
+    public Group getGroupByName(String name) {
+        for (Group g : this.groups) {
+            if (g.getName().equals(name)){
+                return g;
+            }
+        }
+        return null;
+    }
+
+    public void addGroup(Group group) {
+        this.groups.add(group);
+    }
+
     @JsonManagedReference
-    public List<Task> getTasks() {
+    public Set<Task> getTasks() {
         return tasks;
     }
 
-    public void setTasks(List<Task> tasks) {
+    public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public void addTask(Task task){
+        this.tasks.add(task);
     }
 }

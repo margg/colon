@@ -11,12 +11,16 @@
         </id>
         <property name="name" type="string" column="name" not-null="true" />
         <property name="description" type="text" column="description" not-null="true" />
-        <many-to-one name="teacher" column="teacher_id" not-null="true" class="Teacher" />
-        <map name="dates" table="task_dates">
+        <many-to-one name="teacher" column="teacher_id" not-null="true" class="Teacher" lazy="false"/>
+        <map name="dates" table="task_dates" lazy="false">
             <key column="id" />
             <index-many-to-many class="Group" column="group_id" />
             <element column="due_date" type="date" />
         </map>
+        <set name="solutions" inverse="true" lazy="false">
+            <key column="task_id" />
+            <one-to-many class="Solution" />
+        </set>
         <property name="timeLimit" type="integer" column="time_limit" not-null="true" />
         <property name="inFilePath" column="in_file_path" type="string" not-null="false" />
         <property name="outFilePath" column="out_file_path" type="string" not-null="false" />
