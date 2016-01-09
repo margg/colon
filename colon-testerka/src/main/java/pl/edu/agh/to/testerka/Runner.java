@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class Runner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Runner.class);
-    private static final String PROPERTIES_FILEPATH = "./colon-testerka/src/main/resources/application.properties";
+    private static final String PROPERTIES_FILEPATH = "colon-testerka/src/main/resources/application.properties";
     private static TimeUnit timeUnit = TimeUnit.MINUTES;
 
     public static void main(String[] args) {
