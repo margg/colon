@@ -8,8 +8,8 @@ define([
 ], function ($, _, Backbone, MainPageView, StudentTasksView, StudentTaskView) {
     var AppRouter = Backbone.Router.extend({
         routes: {
-            '!/tasks': 'showTasks',
             '!/tasks/:id': 'showTask',
+            '!/tasks': 'showTasks',
             '!': 'mainPage'
         },
 

@@ -11,10 +11,10 @@ public class TaskDao {
     public Task getTask(long id) {
         Session session = HibernateUtils.getSession();
         Transaction transaction = session.beginTransaction();
-        Task task = (Task) session.createQuery("select t from Task t where t.id=:id").setParameter("id", id).uniqueResult();
+        List<Task> tasks =  session.createQuery("select t from Task t where t.id=:id").setParameter("id", id).list();
         transaction.commit();
         session.close();
-        return task;
+        return tasks.get(0);
 
     }
 
