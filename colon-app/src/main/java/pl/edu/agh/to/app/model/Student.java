@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Set;
 
 public class Student extends User{
-
-    private long id;
     private Group group;
     private Set<Solution> solutions;
 
