@@ -18,13 +18,12 @@ public class TaskDao {
 
     }
 
-    public List<Task> getTasks(long id) {
+    public List<Task> getTasks() {
         Session session = HibernateUtils.getSession();
         Transaction transaction = session.beginTransaction();
         List<Task> tasks =  session.createQuery("select t from Task t").list();
         transaction.commit();
         session.close();
         return tasks;
-
     }
 }

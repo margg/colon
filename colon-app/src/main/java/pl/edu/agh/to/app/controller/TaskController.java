@@ -31,7 +31,7 @@ public class TaskController {
 
     @RequestMapping(path="api/student/tasks", method = RequestMethod.GET)
     public List<Task> showTasks() throws IOException {
-        return taskDao.getTasks(1);
+        return taskDao.getTasks();
     }
 
     @RequestMapping(path="api/student/tasks/{id}", method = RequestMethod.POST)
