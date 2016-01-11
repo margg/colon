@@ -1,9 +1,13 @@
 package pl.edu.agh.to.app.model;
 
+import com.fasterxml.jackson.annotation.*;
+
 import java.util.List;
 import java.util.Set;
 
 public class Student extends User{
+    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true)
     private Group group;
     private Set<Solution> solutions;
 
