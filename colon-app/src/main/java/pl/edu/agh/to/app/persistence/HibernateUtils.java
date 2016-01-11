@@ -3,7 +3,7 @@ package pl.edu.agh.to.app.persistence;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
@@ -16,6 +16,9 @@ public class HibernateUtils {
 
     static {
         try {
+            Configuration configuration = new Configuration();
+            configuration.configure();
+
             String host = (System.getenv("DB_HOST") == null) ? "localhost" : System.getenv("DB_HOST");
             String database = (System.getenv("DB_DATABASE") == null) ? "colon_dev" : System.getenv("DB_DATABASE");
             String port = (System.getenv("DB_PORT") == null) ? "3306" : System.getenv("DB_PORT");
@@ -25,13 +28,12 @@ public class HibernateUtils {
 
             String password = (System.getenv("DB_PASSWORD") == null) ? "" : System.getenv("DB_PASSWORD");
 
-            StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().configure();
-            builder.applySetting("hibernate.connection.url", url);
-            builder.applySetting("hibernate.connection.username", username);
-            builder.applySetting("hibernate.connection.password", password);
+            configuration.setProperty("hibernate.connection.url", url);
+            configuration.setProperty("hibernate.connection.username", username);
+            configuration.setProperty("hibernate.connection.password", password);
 
-            serviceRegistry = builder.build();
-            ourSessionFactory = new MetadataSources(serviceRegistry).buildMetadata().buildSessionFactory();
+            serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+            ourSessionFactory = configuration.buildSessionFactory(serviceRegistry);
 
             getSession().close();
         } catch (Throwable ex) {
