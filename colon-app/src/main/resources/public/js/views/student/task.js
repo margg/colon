@@ -36,18 +36,27 @@ define([
             e.preventDefault();
 
             var file = this.$('input[type="file"]')[0].files[0],
-                data = new FormData();
+                formData = new FormData();
 
-            data.append("file", file);
+            formData.append("file", file);
 
             $.ajax({
-                url: 'api/tasks/' + this.model.get('id') + '/solutions/new',
+                url: 'api/student/tasks/' + this.model.get('id') + '/solutions/new',
                 type: 'post',
-                data: data,
-                cache: false,
                 dataType: 'json',
-                processData: false,
-                contentType: false
+                success: function(data) {
+                    $.ajax({
+                        url: '172.29.140.38:80/solutions/' + data.id,
+                        type: 'post',
+                        data: formData,
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        success: function(data){
+                            debugger
+                        }
+                    })
+                }
             });
         }
     });
