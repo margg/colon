@@ -38,7 +38,7 @@ define([
             var file = this.$('input[type="file"]')[0].files[0],
                 formData = new FormData();
 
-            formData.append("file", file);
+            formData.append("solution_file", file);
 
             $.ajax({
                 url: 'api/student/tasks/' + this.model.get('id') + '/solutions/new',
@@ -46,7 +46,7 @@ define([
                 dataType: 'json',
                 success: function(data) {
                     $.ajax({
-                        url: '172.29.140.38:80/solutions/' + data.id,
+                        url: 'http://172.29.140.38:80/solutions/' + data.id,
                         type: 'post',
                         data: formData,
                         cache: false,
