@@ -14,16 +14,29 @@ import java.util.concurrent.TimeUnit;
 public class Runner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Runner.class);
-    private static final String PROPERTIES_FILEPATH = "colon-testerka/src/main/resources/application.properties";
+    private static final String PROPERTIES_FILEPATH = "application.properties";
     private static TimeUnit timeUnit = TimeUnit.MINUTES;
 
     public static void main(String[] args) {
 
+        String propertiesFilepath;
+        if (args.length == 0) {
+            propertiesFilepath = PROPERTIES_FILEPATH;
+            System.out.println("You can specify a properties file by providing the file path as an argument.");
+            System.out.println("Using default filepath for properties file: " + propertiesFilepath);
+        } else {
+            propertiesFilepath = args[0];
+            System.out.println("Using properties file: " + propertiesFilepath);
+        }
+
         Properties properties = new Properties();
-        try (FileInputStream in = new FileInputStream(PROPERTIES_FILEPATH)) {
+        try (FileInputStream in = new FileInputStream(propertiesFilepath)) {
             properties.load(in);
+            LOGGER.info("Loaded properties from file: " + propertiesFilepath);
         } catch (IOException e) {
-            LOGGER.error("Error while loading properties.", e);
+            LOGGER.error("Error while loading properties from: " + propertiesFilepath, e);
+            System.out.println("Error while loading properties. Check your properties file.");
+            System.exit(1);
         }
 
         String dbHostAddress = properties.getProperty("dbHostAddress");
