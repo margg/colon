@@ -1,13 +1,15 @@
 define([
     'jquery',
     'underscore',
-    'backbone'
-], function($, _, Backbone) {
+    'backbone',
+    'collections/solutions'
+], function($, _, Backbone, Solutions) {
     var Task = Backbone.Model.extend({
         defaults: {
             'id': 0,
             'name': '',
             'description': '',
+            'solutions': new Solutions(),
             'dates': null,
             'timeLimit': 0,
             'testInput': '',
