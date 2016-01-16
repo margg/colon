@@ -2,3 +2,69 @@
 .main-container {
     margin-top: 50px;
 }
+
+.cont{
+    width: 1000px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.sub-cont {
+    width: 90%;
+    margin: 0 auto;
+}
+
+form{
+    width: 50%;
+}
+
+.panel-default {
+    margin-top: 10px;
+}
+
+.panel-heading {
+    font-size: 20px;
+}
+
+.input-login {
+    margin: 10px 0;
+}
+
+.inline-elements {
+    margin-bottom: 15px;
+}
+
+.inline-next-element {
+    margin-left: 10px;
+    width: 50%;
+}
+.p-info {
+    margin-left: 10px;
+}
+
+#main-logo {
+    font-weight: bold;
+    font-size: 40px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+#cont-login{
+    margin: 30px auto;
+    width: 300px;
+}
+
+#button-ok {
+    margin-left: 230px;
+}
+
+#dueDate {
+    width: 50%;
+}
+
+#add-new-click {
+    cursor: pointer;
+    margin: auto;
+}

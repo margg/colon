@@ -1,14 +1,15 @@
 package pl.edu.agh.to.app.model;
 
 import java.util.List;
+import java.util.Set;
 
 public class Student extends User{
 
     private long id;
     private Group group;
-    private List<Solution> solutions;
+    private Set<Solution> solutions;
 
-    public Student(String firstName, String lastName, String username, String password, List<Solution> solutions) {
+    public Student(String firstName, String lastName, String username, String password, Set<Solution> solutions) {
         super(firstName, lastName, username, password);
         this.solutions = solutions;
     }
@@ -25,12 +26,16 @@ public class Student extends User{
         this.group = group;
     }
 
-    public List<Solution> getSolutions() {
+    public Set<Solution> getSolutions() {
         return solutions;
     }
 
-    public void setSolutions(List<Solution> solutions) {
+    public void setSolutions(Set<Solution> solutions) {
         this.solutions = solutions;
+    }
+
+    public void addSolution(Solution solution){
+        this.solutions.add(solution);
     }
 
 }

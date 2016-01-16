@@ -1,11 +1,14 @@
 package pl.edu.agh.to.app.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 public class Solution {
 
     private long id;
     private int execTime;
     private String status;
     private User author;
+    @JsonBackReference
     private Task task;
     private String code;
     private String filePath;

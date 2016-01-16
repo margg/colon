@@ -3,15 +3,16 @@ package pl.edu.agh.to.app.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.util.List;
+import java.util.Set;
 
 public class Group {
     private long id;
     private String name;
     @JsonBackReference
     private Teacher teacher;
-    private List<Student> students;
+    private Set<Student> students;
 
-    public Group(Teacher teacher, List<Student> students, String name) {
+    public Group(Teacher teacher, Set<Student> students, String name) {
         this.teacher = teacher;
         this.students = students;
         this.name = name;
@@ -34,12 +35,16 @@ public class Group {
         this.teacher = teacher;
     }
 
-    public List<Student> getStudents() {
+    public Set<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(List<Student> students) {
+    public void setStudents(Set<Student> students) {
         this.students = students;
+    }
+
+    public void addStudent(Student student){
+        this.students.add(student);
     }
 
 }

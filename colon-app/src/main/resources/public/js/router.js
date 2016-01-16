@@ -2,13 +2,15 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'views/main-page'
-], function ($, _, Backbone, MainPageView) {
+    'views/main-page',
+    'views/student/tasks',
+    'views/student/task'
+], function ($, _, Backbone, MainPageView, StudentTasksView, StudentTaskView) {
     var AppRouter = Backbone.Router.extend({
         routes: {
-            '!': 'mainPage',
-            '!/': 'mainPage',
-            '!ss': 'mainPage'
+            '!/tasks': 'showTasks',
+            '!/tasks/:id': 'showTask',
+            '!': 'mainPage'
         },
 
         mainPage: function () {
@@ -16,6 +18,21 @@ define([
                 el: $('.sub-cont')
             });
             mainPageView.render();
+        },
+
+        showTasks: function() {
+            var studentTasksView = new StudentTasksView({
+                el: $('.sub-cont')
+            });
+            studentTasksView.render();
+        },
+
+        showTask: function(id) {
+            var studentTaskView = new StudentTaskView({
+                el: $('.sub-cont'),
+                id: id
+            });
+            studentTaskView.render();
         }
 
     });

@@ -2,12 +2,10 @@ package pl.edu.agh.to.app.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.codehaus.jackson.annotate.JsonIgnore;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Task {
     private long id;
@@ -15,15 +13,18 @@ public class Task {
     private String description;
     @JsonBackReference
     private Teacher teacher;
-    @JsonManagedReference
     private Map<Group, Date> dates;
     private int timeLimit;
     private String testInput;
     private String testOutput;
     private String inFilePath;
     private String outFilePath;
+    @JsonManagedReference
+    private Set<Solution> solutions;
 
-    public Task(Teacher teacher, Map<Group, Date> dates, int timeLimit, String testInput, String testOutput) {
+    public Task(String name, String description, Teacher teacher, Map<Group, Date> dates, int timeLimit, String testInput, String testOutput) {
+        this.name = name;
+        this.description = description;
         this.teacher = teacher;
         this.dates = dates;
         this.timeLimit = timeLimit;
@@ -116,4 +117,13 @@ public class Task {
     public void setTestOutput(String testOutput) {
         this.testOutput = testOutput;
     }
+
+    public Set<Solution> getSolutions() {
+        return solutions;
+    }
+
+    public void setSolutions(Set<Solution> solutions) {
+        this.solutions = solutions;
+    }
+
 }
