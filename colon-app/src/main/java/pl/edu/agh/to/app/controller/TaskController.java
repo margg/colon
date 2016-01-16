@@ -67,6 +67,7 @@ public class TaskController {
 
         HttpPost httppost = new HttpPost("http://172.29.140.38:80/solutions/" + id);
         File file = new File(mfile.getOriginalFilename());
+        File file = File.createTempFile(mfile.getOriginalFilename(), null);
         mfile.transferTo(file);
 
         MultipartEntity mpEntity = new MultipartEntity();
@@ -84,6 +85,8 @@ public class TaskController {
         if (resEntity != null) {
             resEntity.consumeContent();
         }
+
+        file.delete();
 
         httpclient.getConnectionManager().shutdown();
         return response.getStatusLine().getStatusCode();
