@@ -62,11 +62,6 @@ public class Runner {
         TesterHttpHandler testerHttpHandler = new TesterHttpHandler(runnerService, statusService);
         testerHttpHandler.setupTestersAPI();
 
-        FilerMock filerMock = new FilerMock();
-        filerMock.setupAPI();
-        DBServiceMock dbServiceMock = new DBServiceMock();
-        dbServiceMock.setupAPI();
-
         TesterScheduledService testerScheduledService = new TesterScheduledService(
                 new JDBCSolutionProvider(new DBConnection(dbHostAddress, dbPort, dbName, dbUsername, dbPassword)),
                 runnerService, periodInMinutes, timeUnit);
