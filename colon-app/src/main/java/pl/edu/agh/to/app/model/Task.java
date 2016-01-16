@@ -17,8 +17,6 @@ public class Task {
     private int timeLimit;
     private String testInput;
     private String testOutput;
-    private String inFilePath;
-    private String outFilePath;
     @JsonManagedReference
     private Set<Solution> solutions;
 
@@ -82,22 +80,6 @@ public class Task {
 
     public void setTimeLimit(int timeLimit) {
         this.timeLimit = timeLimit;
-    }
-
-    public String getInFilePath() {
-        return inFilePath;
-    }
-
-    public void setInFilePath(String inFilePath) {
-        this.inFilePath = inFilePath;
-    }
-
-    public String getOutFilePath() {
-        return outFilePath;
-    }
-
-    public void setOutFilePath(String outFilePath) {
-        this.outFilePath = outFilePath;
     }
 
     // These should load test files from colon-files

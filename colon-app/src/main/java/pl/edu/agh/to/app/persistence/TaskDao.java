@@ -26,4 +26,13 @@ public class TaskDao {
         session.close();
         return tasks;
     }
+
+    public Task updateTask(Task task) {
+        Session session = HibernateUtils.getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(task);
+        transaction.commit();
+        session.close();
+        return task;
+    }
 }

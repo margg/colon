@@ -34,6 +34,12 @@ public class TaskController {
         return task;
     }
 
+    @RequestMapping(path="api/student/tasks/{id}", method = RequestMethod.PUT)
+    public Task updateTask(@PathVariable long id, @RequestBody Task task) throws IOException {
+        taskDao.updateTask(task);
+        return task;
+    }
+
     @RequestMapping(path="api/student/tasks", method = RequestMethod.GET)
     public List<Task> showTasks() throws IOException {
         return taskDao.getTasks();
@@ -57,8 +63,6 @@ public class TaskController {
         } else {
             return null;
         }
-
-
     }
 
     private int sendFile(MultipartFile mfile, long id) throws IOException {
@@ -66,7 +70,6 @@ public class TaskController {
         httpclient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 
         HttpPost httppost = new HttpPost("http://172.29.140.38:80/solutions/" + id);
-        File file = new File(mfile.getOriginalFilename());
         File file = File.createTempFile(mfile.getOriginalFilename(), null);
         mfile.transferTo(file);
 
@@ -75,7 +78,6 @@ public class TaskController {
         mpEntity.addPart("solution_file", cbFile);
 
         httppost.setEntity(mpEntity);
-        System.out.println("executing request " + httppost.getRequestLine());
         CloseableHttpResponse response = httpclient.execute(httppost);
         org.apache.http.HttpEntity resEntity = response.getEntity();
 
