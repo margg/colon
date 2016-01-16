@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class Solution {
 
     private long id;
-    private int execTime;
+    private Integer execTime;
     private String status;
     private User author;
     @JsonBackReference
@@ -13,7 +13,7 @@ public class Solution {
     private String code;
     private String filePath;
 
-    public Solution(int execTime, String status, User author, Task task, String code) {
+    public Solution(Integer execTime, String status, User author, Task task, String code) {
         this.execTime = execTime;
         this.status = status;
         this.author = author;
@@ -32,11 +32,11 @@ public class Solution {
         this.id = id;
     }
 
-    public int getExecTime() {
+    public Integer getExecTime() {
         return execTime;
     }
 
-    public void setExecTime(int execTime) {
+    public void setExecTime(Integer execTime) {
         this.execTime = execTime;
     }
 

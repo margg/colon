@@ -1,18 +1,18 @@
 package pl.edu.agh.to.app.model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import pl.edu.agh.to.app.view.GroupDateSerializer;
 
 import java.util.*;
-
 public class Task {
     private long id;
     private String name;
     private String description;
     @JsonBackReference
     private Teacher teacher;
+    @JsonSerialize(using = GroupDateSerializer.class)
     private Map<Group, Date> dates;
     private int timeLimit;
     private String testInput;
