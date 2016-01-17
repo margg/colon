@@ -18,12 +18,12 @@ public class JDBCStatusService implements StatusService {
 
     private DBConnection dbConnection;
     private static final Map<String, TestResultStatus> statusMap = ImmutableMap.<String, TestResultStatus>builder()
-            .put("NOT", TestResultStatus.NOT_TESTED)
+            .put("NOT_TESTED", TestResultStatus.NOT_TESTED)
             .put("OK", TestResultStatus.OK)
-            .put("TLE", TestResultStatus.TIME_LIMIT_EXCEEDED)
-            .put("ANS", TestResultStatus.ANSWER)
-            .put("RTE", TestResultStatus.RUNTIME_ERROR)
-            .put("REJ", TestResultStatus.REJECTED)
+            .put("TIME_LIMIT_EXCEEDED", TestResultStatus.TIME_LIMIT_EXCEEDED)
+            .put("ANSWER", TestResultStatus.ANSWER)
+            .put("RUNTIME_ERROR", TestResultStatus.RUNTIME_ERROR)
+            .put("REJECTED", TestResultStatus.REJECTED)
             .build();
 
     public JDBCStatusService(DBConnection dbConnection) {
@@ -39,19 +39,26 @@ public class JDBCStatusService implements StatusService {
             preparedStatement.setInt(1, solutionId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (!resultSet.next()) {
+                LOGGER.info("Solution {} not existing in DB.", solutionId);
                 return TaskStatus.NON_EXISTING;
             }
             String dbStatus = resultSet.getString("status");
             dbStatus = (dbStatus == null ? "NOT" : dbStatus);
+            LOGGER.info("DB status for solution " + solutionId + ": " + dbStatus);
+
             testResultStatus = statusMap.get(dbStatus);
+            LOGGER.info("TestResultStatus for solution " + solutionId + ": " + testResultStatus);
+
 
         } catch (SQLException | ClassNotFoundException e) {
             LOGGER.error("Error while getting status for solution " + solutionId, e);
         }
 
         if(testResultStatus == TestResultStatus.NOT_TESTED) {
+            LOGGER.info("TestResultStatus for solution " + solutionId + " == NOT_TESTED.");
             return TaskStatus.NOT_TESTED;
         }
+        LOGGER.info("TaskStatus for solution " + solutionId + " == TESTED.");
         return TaskStatus.TESTED;
     }
 }

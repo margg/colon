@@ -28,15 +28,20 @@ public class TesterHttpHandler {
             Integer solutionId = Integer.valueOf(req.params(":solution_id"));
             LOGGER.info("Received GET request for solution {}.", solutionId);
 
+
             if (runnerService.isInProgress(solutionId)) {
+                LOGGER.info("Solution {} already in progress.", solutionId);
                 return TaskStatus.IN_PROGRESS;
             }
+            LOGGER.info("Using {}", statusService.getClass());
             TaskStatus status = statusService.getStatusFor(solutionId);
 
             if (status == TaskStatus.NOT_TESTED) {
                 runnerService.submitTask(solutionId, new JythonSandbox());
+                LOGGER.info("Submitted job for solution {}.", solutionId);
                 return TaskStatus.IN_PROGRESS;
             }
+            LOGGER.info("Returning " + status.toString() + " for solution {}.", solutionId);
             return status;
         }, gson::toJson);
     }
