@@ -43,22 +43,16 @@ public class JDBCStatusService implements StatusService {
                 return TaskStatus.NON_EXISTING;
             }
             String dbStatus = resultSet.getString("status");
-            dbStatus = (dbStatus == null ? "NOT" : dbStatus);
-            LOGGER.info("DB status for solution " + solutionId + ": " + dbStatus);
-
+            dbStatus = (dbStatus == null ? TestResultStatus.NOT_TESTED.name() : dbStatus);
             testResultStatus = statusMap.get(dbStatus);
-            LOGGER.info("TestResultStatus for solution " + solutionId + ": " + testResultStatus);
-
-
+            LOGGER.info("TestResultStatus for solution {}: {} -> {}.", solutionId, dbStatus, testResultStatus.name());
         } catch (SQLException | ClassNotFoundException e) {
             LOGGER.error("Error while getting status for solution " + solutionId, e);
         }
 
         if(testResultStatus == TestResultStatus.NOT_TESTED) {
-            LOGGER.info("TestResultStatus for solution " + solutionId + " == NOT_TESTED.");
             return TaskStatus.NOT_TESTED;
         }
-        LOGGER.info("TaskStatus for solution " + solutionId + " == TESTED.");
         return TaskStatus.TESTED;
     }
 }
