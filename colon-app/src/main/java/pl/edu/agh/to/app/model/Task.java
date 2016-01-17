@@ -1,11 +1,14 @@
 package pl.edu.agh.to.app.model;
 
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import pl.edu.agh.to.app.view.GroupDateSerializer;
 
 import java.util.*;
+
 public class Task {
     private long id;
     private String name;
@@ -17,6 +20,10 @@ public class Task {
     private int timeLimit;
     private String testInput;
     private String testOutput;
+    @JsonIgnore
+    private String inFilePath;
+    @JsonIgnore
+    private String outFilePath;
     @JsonManagedReference
     private Set<Solution> solutions;
 
@@ -80,6 +87,22 @@ public class Task {
 
     public void setTimeLimit(int timeLimit) {
         this.timeLimit = timeLimit;
+    }
+
+    public String getInFilePath() {
+        return inFilePath;
+    }
+
+    public void setInFilePath(String inFilePath) {
+        this.inFilePath = inFilePath;
+    }
+
+    public String getOutFilePath() {
+        return outFilePath;
+    }
+
+    public void setOutFilePath(String outFilePath) {
+        this.outFilePath = outFilePath;
     }
 
     // These should load test files from colon-files

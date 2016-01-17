@@ -4,8 +4,9 @@ define([
     'backbone',
     'models/task',
     'models/solution',
-    'text!templates/student/task.html'
-], function ($, _, Backbone, Task, Solution, studentTaskTemplate) {
+    'text!templates/student/task.html',
+    'text!templates/student/solutionItem.html'
+], function ($, _, Backbone, Task, Solution, studentTaskTemplate, solutionItemTemplate) {
     var StudentTaskView = Backbone.View.extend({
 
         model: Task,
@@ -19,7 +20,6 @@ define([
         },
 
         render: function () {
-
             this.model.fetch({
                 success: function (model, response, options) {
                     this.renderView();
@@ -31,6 +31,12 @@ define([
             this.$el.html(_.template(studentTaskTemplate, {
                 model: this.model
             }));
+
+            this.model.get('solutions').each(function(sol){
+                this.$('.solutions-tab tbody').append(_.template(solutionItemTemplate, {
+                    solution: sol
+                }));
+            })
         },
 
         onSubmitClick: function (e) {
@@ -50,8 +56,9 @@ define([
                 processData: false,
                 contentType: false,
                 success: function (data) {
-                    debugger;
                     this.model.get('solutions').add(new Solution(data));
+                    this.model.save()
+                        .done(this.renderView()).bind(this);
 
                 }.bind(this)
             });
