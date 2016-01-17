@@ -21,7 +21,7 @@ public class JDBCSaveResultService implements SaveResultService {
         try (Connection connection = dbConnection.getConnection()) {
             String query = "UPDATE solutions SET status = ? , exec_time = ? WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, result.getTestResultStatus().toString());
+            preparedStatement.setString(1, result.getTestResultStatus().name());
             preparedStatement.setInt(2, (int) result.getExecutionTimeMillis());
             preparedStatement.setInt(3, solutionId);
             preparedStatement.executeUpdate();
