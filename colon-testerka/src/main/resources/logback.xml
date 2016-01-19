@@ -32,7 +32,9 @@
     </logger>
 
     <root level="debug">
-        <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE-AUDIT"/>
+    </root>
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

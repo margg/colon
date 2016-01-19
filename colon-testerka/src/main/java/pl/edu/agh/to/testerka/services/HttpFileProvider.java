@@ -5,6 +5,8 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+
 public class HttpFileProvider implements FileContentProvider {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpFileProvider.class);
@@ -16,21 +18,24 @@ public class HttpFileProvider implements FileContentProvider {
     }
 
     @Override
-    public String getSolutionContent(Integer solutionId) {
+    public synchronized String getSolutionContent(Integer solutionId) {
         String fileContent = "";
+        String url = "http://" + host + "/solutions/" + solutionId;
+        LOGGER.info("Getting content from {}...", url);
         try {
-            fileContent = Unirest.get(host + "files/" + solutionId).asJson().getBody().toString();
+            fileContent = Unirest.get(url).asString().getBody();
         } catch (UnirestException e) {
-            LOGGER.error("Error while getting solution content.", e);
+            LOGGER.error("Error while getting file content.", e);
         }
         return fileContent;
     }
 
     @Override
-    public String getInputFileContent(Integer solutionId) {
+    public synchronized String getInputFileContent(Integer solutionId) {
         String inputFile = "";
+        String url = "http://" + host + "/solutions/" + solutionId + "/in";
         try {
-            inputFile = Unirest.get(host + "solution/" + solutionId + "/in").asJson().getBody().toString();
+            inputFile = Unirest.get(url).asString().getBody();
         } catch (UnirestException e) {
             LOGGER.error("Error while getting input file content.", e);
         }
@@ -38,10 +43,11 @@ public class HttpFileProvider implements FileContentProvider {
     }
 
     @Override
-    public String getOutputFileContent(Integer solutionId) {
+    public synchronized String getOutputFileContent(Integer solutionId) {
         String outputFile = "";
+        String url = "http://" + host + "/solutions/" + solutionId + "/out";
         try {
-            outputFile = Unirest.get(host + "solution/" + solutionId + "/out").asJson().getBody().toString();
+            outputFile = Unirest.get(url).asString().getBody();
         } catch (UnirestException e) {
             LOGGER.error("Error while getting output file content.", e);
         }

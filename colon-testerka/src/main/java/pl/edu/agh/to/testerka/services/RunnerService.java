@@ -4,6 +4,7 @@ import org.eclipse.jetty.util.ConcurrentHashSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.edu.agh.to.testerka.sandbox.Sandbox;
+import pl.edu.agh.to.testerka.sandbox.TestResult;
 
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
@@ -45,11 +46,21 @@ public class RunnerService {
 
         @Override
         public void run() {
-            String fileContent = contentProvider.getSolutionContent(solutionId);
-            String inputFile = contentProvider.getInputFileContent(solutionId);
-            String outputFile = contentProvider.getOutputFileContent(solutionId);
+            LOGGER.info("Started runnable for solution {}.", solutionId);
 
-            resultService.save(sandbox.execute(fileContent, inputFile, outputFile), solutionId);
+            String fileContent = contentProvider.getSolutionContent(solutionId);
+            LOGGER.info("File content for solution {}:\n{}", solutionId, fileContent);
+            String inputFile = contentProvider.getInputFileContent(solutionId);
+            LOGGER.info("Input file content for solution {}:\n{}", solutionId, inputFile);
+            String outputFile = contentProvider.getOutputFileContent(solutionId);
+            LOGGER.info("Output file content for solution {}:\n{}", solutionId, outputFile);
+
+            LOGGER.info("Starting execution of solution {}.", solutionId);
+            TestResult result = sandbox.execute(fileContent, inputFile, outputFile);
+            LOGGER.info("Finished executing solution {}.", solutionId);
+
+            resultService.save(result, solutionId);
+            LOGGER.info("Saved result of solution {}: {} - {} ms.", solutionId, result.getTestResultStatus().name(), result.getExecutionTimeMillis());
 
             jobsInProgress.remove(solutionId);
             LOGGER.info("Finished job for solution {}.", solutionId);
