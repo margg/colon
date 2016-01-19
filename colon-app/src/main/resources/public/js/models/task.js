@@ -22,6 +22,7 @@ define([
         },
 
         parse: function(data) {
+            this.set('solutions', new Solutions());
             _.forEach(data.solutions, function(solution){
                 this.get('solutions').add(new Solution(solution));
             }.bind(this));

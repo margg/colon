@@ -4,9 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import pl.edu.agh.to.app.view.SolutionSerializer;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @JsonSerialize(using = SolutionSerializer.class)
 public class Solution {
@@ -88,13 +87,6 @@ public class Solution {
     }
 
     public int getRankPosition() {
-        List<Solution> solutions = new ArrayList<Solution>(this.task.getSolutions());
-        solutions.sort(new Comparator<Solution>() {
-            @Override
-            public int compare(Solution o1, Solution o2) {
-                return o1.getExecTime().compareTo(o2.getExecTime());
-            }
-        });
-        return solutions.indexOf(this);
+        return task.getSortedSolutions().indexOf(this);
     }
 }

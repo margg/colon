@@ -23,6 +23,9 @@ define([
             this.model.fetch({
                 success: function (model, response, options) {
                     this.renderView();
+                }.bind(this),
+                error: function(model, response, options){
+                    this.$el.html("An error occurred.")
                 }.bind(this)
             });
         },
@@ -32,6 +35,20 @@ define([
                 model: this.model
             }));
 
+            var rank = _.filter(this.model.get('solutions').models, function(sol){
+                return sol.get('status')==='OK';
+            });
+            rank = _.sortBy(rank, function(sol){
+                return sol.get('execTime');
+            });
+
+            this.model.get('solutions').each(function(sol){
+                sol.set('rank', rank.indexOf(sol) >= 0 ? rank.indexOf(sol)+1 : 0);
+            });
+
+            _.sortBy(this.model.get('solutions').models, function(sol){
+                return sol.get('rank');
+            });
             this.model.get('solutions').each(function(sol){
                 this.$('.solutions-tab tbody').append(_.template(solutionItemTemplate, {
                     solution: sol

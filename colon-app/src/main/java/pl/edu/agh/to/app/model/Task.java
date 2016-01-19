@@ -127,6 +127,29 @@ public class Task {
         return solutions;
     }
 
+    public List<Solution> getSortedSolutions() {
+
+        ArrayList<Solution> solutions = new ArrayList<>(this.solutions);
+        solutions.sort((o1, o2) -> {
+            if (Objects.equals(o1.getStatus(), o2.getStatus())) {
+                return o1.getExecTime().compareTo(o2.getExecTime());
+            }
+            if (Objects.equals(o1.getStatus(), "OK")) {
+                return 1;
+            } else if (Objects.equals(o2.getStatus(), "OK")) {
+                return -1;
+            }
+            if (Objects.equals(o1.getStatus(), "ANSWER")) {
+                return 1;
+            } else if (Objects.equals(o2.getStatus(), "ANSWER")) {
+                return -1;
+            }
+            // STH STRANGE HAPPENED
+            return 0;
+        });
+        return solutions;
+    }
+
     public void setSolutions(Set<Solution> solutions) {
         this.solutions = solutions;
     }
