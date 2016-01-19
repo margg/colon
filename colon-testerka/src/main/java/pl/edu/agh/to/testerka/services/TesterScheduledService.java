@@ -1,12 +1,15 @@
 package pl.edu.agh.to.testerka.services;
 
 import com.google.common.util.concurrent.AbstractScheduledService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.edu.agh.to.testerka.sandbox.JythonSandbox;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class TesterScheduledService extends AbstractScheduledService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TesterScheduledService.class);
 
     private SolutionProvider solutionProvider;
     private RunnerService runnerService;
@@ -23,6 +26,7 @@ public class TesterScheduledService extends AbstractScheduledService {
 
     @Override
     protected void runOneIteration() throws Exception {
+        LOGGER.info("Running scheduled testing...");
         runUntestedSolutions();
     }
 
@@ -33,6 +37,7 @@ public class TesterScheduledService extends AbstractScheduledService {
 
     private void runUntestedSolutions() {
         List<Integer> untestedSolutions = getUntestedSolutions();
+        LOGGER.info("Running scheduled testing for solutions: " + untestedSolutions.toString());
         for (Integer solutionId : untestedSolutions) {
             runnerService.submitTask(solutionId, new JythonSandbox());
         }
